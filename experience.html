@@ -11,18 +11,59 @@
   <link rel="stylesheet" href="web.css">
   <style>
 
-    .exp-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    /* ── Timeline wrapper ── */
+    .timeline {
+      position: relative;
       padding: var(--sec) 0;
+    }
+
+    /* Vertical line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--border-mid);
+    }
+
+    /* ── Row: marker + card ── */
+    .timeline-entry {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 28px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .timeline-entry:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Dot ── */
+    .timeline-marker {
+      display: flex;
+      justify-content: center;
+      padding-top: 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--border-mid);
+      flex-shrink: 0;
     }
 
     /* ── Card ── */
     .exp-card {
       border: 1px solid var(--border-mid);
       border-radius: var(--radius);
-      padding: 32px 36px;
+      padding: 28px 32px;
       background: var(--bg);
       transition: box-shadow var(--t) var(--ease), transform var(--t) var(--ease);
     }
@@ -38,46 +79,44 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .exp-card-left {
       display: flex;
       align-items: flex-start;
-      gap: 18px;
+      gap: 16px;
     }
 
     .exp-badge {
-      width: 44px;
-      height: 44px;
-      border-radius: 11px;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
       background: var(--bg-alt);
       border: 1px solid var(--border-mid);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
       letter-spacing: -0.01em;
       color: var(--text-2);
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
-    .exp-title-block {}
-
     .exp-role {
-      font-size: clamp(1.0625rem, 2vw, 1.25rem);
+      font-size: clamp(1rem, 2vw, 1.1875rem);
       font-weight: 700;
       letter-spacing: -0.025em;
       color: var(--text);
       line-height: 1.25;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .exp-company {
       font-size: 0.9375rem;
-      font-weight: 500;
+      font-weight: 450;
       color: var(--text-2);
       letter-spacing: -0.01em;
     }
@@ -95,7 +134,7 @@
       letter-spacing: 0.02em;
       white-space: nowrap;
       flex-shrink: 0;
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
     /* ── Meta row ── */
@@ -104,7 +143,7 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 0;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .exp-meta-item {
@@ -112,38 +151,43 @@
       color: var(--text-3);
       display: flex;
       align-items: center;
-      gap: 10px;
+    }
+
+    .exp-meta-item + .exp-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0;
     }
 
     .exp-meta-item + .exp-meta-item::before {
       content: '';
-      display: block;
+      display: inline-block;
       width: 3px;
       height: 3px;
       border-radius: 50%;
       background: var(--text-3);
-      opacity: 0.5;
-      margin-right: 0;
+      opacity: 0.4;
+      margin: 0 9px;
     }
 
     /* ── Divider ── */
     .exp-card-divider {
       height: 1px;
       background: var(--border);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     /* ── Bullet list ── */
     .exp-bullets {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
     }
 
     .exp-bullet {
       display: flex;
       align-items: baseline;
-      gap: 12px;
+      gap: 11px;
       font-size: 0.9375rem;
       color: var(--text-2);
       line-height: 1.65;
@@ -160,29 +204,32 @@
       margin-top: 9px;
     }
 
-    /* ── Skills tag row ── */
-    .exp-skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
-    }
-
     /* ── Responsive ── */
     @media (max-width: 640px) {
+      .timeline::before {
+        display: none;
+      }
+
+      .timeline-entry {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-marker {
+        display: none;
+      }
+
       .exp-card {
-        padding: 24px 22px;
+        padding: 22px 20px;
       }
 
       .exp-card-header {
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
       }
 
       .exp-type {
         margin-top: 0;
+        align-self: flex-start;
       }
     }
   </style>
@@ -214,134 +261,150 @@
   </div>
 
   <div class="container">
-    <div class="exp-list">
+    <div class="timeline">
 
       <!-- 1. VP, MSU Entrepreneurship Association -->
-      <div class="exp-card fade-up">
-        <div class="exp-card-header">
-          <div class="exp-card-left">
-            <div class="exp-badge">EA</div>
-            <div class="exp-title-block">
-              <div class="exp-role">Vice President</div>
-              <div class="exp-company">MSU Entrepreneurship Association</div>
+      <div class="timeline-entry fade-up">
+        <div class="timeline-marker">
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card-header">
+            <div class="exp-card-left">
+              <div class="exp-badge">EA</div>
+              <div>
+                <div class="exp-role">Vice President</div>
+                <div class="exp-company">MSU Entrepreneurship Association</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="exp-meta">
-          <div class="exp-meta-item">Sep 2025 – Present</div>
-          <div class="exp-meta-item">East Lansing, Michigan</div>
-          <div class="exp-meta-item">On-site</div>
-        </div>
-        <div class="exp-card-divider"></div>
-        <div class="exp-bullets">
-          <div class="exp-bullet">Driving strategic initiatives to support student entrepreneurs and expand industry partnerships.</div>
-          <div class="exp-bullet">Leading and mentoring the executive team, guiding events, growth strategy, and community engagement.</div>
+          <div class="exp-meta">
+            <div class="exp-meta-item">Sep 2025 – Present</div>
+            <div class="exp-meta-item">East Lansing, Michigan</div>
+            <div class="exp-meta-item">On-site</div>
+          </div>
+          <div class="exp-card-divider"></div>
+          <div class="exp-bullets">
+            <div class="exp-bullet">Driving strategic initiatives to support student entrepreneurs and expand industry partnerships.</div>
+            <div class="exp-bullet">Leading and mentoring the executive team, guiding events, growth strategy, and community engagement.</div>
+          </div>
         </div>
       </div>
 
       <!-- 2. Founder & CEO, Sprout -->
-      <div class="exp-card fade-up fade-up-delay-1">
-        <div class="exp-card-header">
-          <div class="exp-card-left">
-            <div class="exp-badge">S</div>
-            <div class="exp-title-block">
-              <div class="exp-role">Founder &amp; CEO</div>
-              <div class="exp-company">Sprout</div>
+      <div class="timeline-entry fade-up fade-up-delay-1">
+        <div class="timeline-marker">
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card-header">
+            <div class="exp-card-left">
+              <div class="exp-badge">S</div>
+              <div>
+                <div class="exp-role">Founder &amp; CEO</div>
+                <div class="exp-company">Sprout</div>
+              </div>
             </div>
+            <span class="exp-type">Full-time</span>
           </div>
-          <span class="exp-type">Full-time</span>
-        </div>
-        <div class="exp-meta">
-          <div class="exp-meta-item">Jun 2025 – Present</div>
-          <div class="exp-meta-item">Lansing, Michigan</div>
-        </div>
-        <div class="exp-card-divider"></div>
-        <div class="exp-bullets">
-          <div class="exp-bullet">Building an interactive education platform that bridges the gap between K–12 classrooms and real-world career readiness.</div>
-          <div class="exp-bullet">Designing scenario-based simulations that teach financial literacy, AI systems fundamentals, entrepreneurship, and applied decision-making.</div>
-          <div class="exp-bullet">Leading full-stack product development, platform architecture, and AI-supported learning integrations.</div>
-          <div class="exp-bullet">Developing institutional partnerships, university co-design collaborations, and district pilot programs.</div>
+          <div class="exp-meta">
+            <div class="exp-meta-item">Jun 2025 – Present</div>
+            <div class="exp-meta-item">Lansing, Michigan</div>
+          </div>
+          <div class="exp-card-divider"></div>
+          <div class="exp-bullets">
+            <div class="exp-bullet">Building an interactive education platform that bridges the gap between K–12 classrooms and real-world career readiness.</div>
+            <div class="exp-bullet">Designing scenario-based simulations that teach financial literacy, AI systems fundamentals, entrepreneurship, and applied decision-making.</div>
+            <div class="exp-bullet">Leading full-stack product development, platform architecture, and AI-supported learning integrations.</div>
+            <div class="exp-bullet">Developing institutional partnerships, university co-design collaborations, and district pilot programs.</div>
+          </div>
         </div>
       </div>
 
       <!-- 3. Data Analytics Extern, Amazon -->
-      <div class="exp-card fade-up fade-up-delay-2">
-        <div class="exp-card-header">
-          <div class="exp-card-left">
-            <div class="exp-badge">A</div>
-            <div class="exp-title-block">
-              <div class="exp-role">Data Analytics Extern</div>
-              <div class="exp-company">Amazon</div>
+      <div class="timeline-entry fade-up fade-up-delay-2">
+        <div class="timeline-marker">
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card-header">
+            <div class="exp-card-left">
+              <div class="exp-badge">A</div>
+              <div>
+                <div class="exp-role">Data Analytics Extern</div>
+                <div class="exp-company">Amazon</div>
+              </div>
             </div>
+            <span class="exp-type">Internship</span>
           </div>
-          <span class="exp-type">Internship</span>
-        </div>
-        <div class="exp-meta">
-          <div class="exp-meta-item">Oct 2025 – Jan 2026</div>
-          <div class="exp-meta-item">Detroit, Michigan</div>
-          <div class="exp-meta-item">Remote</div>
-        </div>
-        <div class="exp-card-divider"></div>
-        <div class="exp-bullets">
-          <div class="exp-bullet">Worked on an 8-week externship analyzing real operational data from Amazon's Fulfillment Centers.</div>
-          <div class="exp-bullet">Focused on improving employee experience and workforce efficiency through data-driven insights.</div>
+          <div class="exp-meta">
+            <div class="exp-meta-item">Oct 2025 – Jan 2026</div>
+            <div class="exp-meta-item">Detroit, Michigan</div>
+            <div class="exp-meta-item">Remote</div>
+          </div>
+          <div class="exp-card-divider"></div>
+          <div class="exp-bullets">
+            <div class="exp-bullet">Worked on an 8-week externship analyzing real operational data from Amazon's Fulfillment Centers.</div>
+            <div class="exp-bullet">Focused on improving employee experience and workforce efficiency through data-driven insights.</div>
+          </div>
         </div>
       </div>
 
       <!-- 4. Software Engineer Intern, WeCLEAN -->
-      <div class="exp-card fade-up">
-        <div class="exp-card-header">
-          <div class="exp-card-left">
-            <div class="exp-badge">WC</div>
-            <div class="exp-title-block">
-              <div class="exp-role">Software Engineer Intern</div>
-              <div class="exp-company">We CLEAN Inc</div>
+      <div class="timeline-entry fade-up">
+        <div class="timeline-marker">
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card-header">
+            <div class="exp-card-left">
+              <div class="exp-badge">WC</div>
+              <div>
+                <div class="exp-role">Software Engineer Intern</div>
+                <div class="exp-company">We CLEAN Inc</div>
+              </div>
             </div>
+            <span class="exp-type">Part-time</span>
           </div>
-          <span class="exp-type">Part-time</span>
-        </div>
-        <div class="exp-meta">
-          <div class="exp-meta-item">Feb 2025 – Jul 2025</div>
-          <div class="exp-meta-item">East Lansing, Michigan</div>
-          <div class="exp-meta-item">Hybrid</div>
-        </div>
-        <div class="exp-card-divider"></div>
-        <div class="exp-bullets">
-          <div class="exp-bullet">Oversaw design, development, and optimization of digital platforms to expand online presence.</div>
-          <div class="exp-bullet">Led technical projects and mentored team members, fostering development and growth.</div>
-        </div>
-        <div class="exp-skills">
-          <span class="tag">Leading Development Teams</span>
+          <div class="exp-meta">
+            <div class="exp-meta-item">Feb 2025 – Jul 2025</div>
+            <div class="exp-meta-item">East Lansing, Michigan</div>
+            <div class="exp-meta-item">Hybrid</div>
+          </div>
+          <div class="exp-card-divider"></div>
+          <div class="exp-bullets">
+            <div class="exp-bullet">Oversaw design, development, and optimization of digital platforms to expand online presence.</div>
+            <div class="exp-bullet">Led technical projects and mentored team members, fostering development and growth.</div>
+          </div>
         </div>
       </div>
 
       <!-- 5. Data Systems Analyst Intern, Weinstein Jewelers -->
-      <div class="exp-card fade-up fade-up-delay-1">
-        <div class="exp-card-header">
-          <div class="exp-card-left">
-            <div class="exp-badge">WJ</div>
-            <div class="exp-title-block">
-              <div class="exp-role">Data Systems Analyst Intern</div>
-              <div class="exp-company">Weinstein Jewelers of Novi</div>
+      <div class="timeline-entry fade-up fade-up-delay-1">
+        <div class="timeline-marker">
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card-header">
+            <div class="exp-card-left">
+              <div class="exp-badge">WJ</div>
+              <div>
+                <div class="exp-role">Data Systems Analyst Intern</div>
+                <div class="exp-company">Weinstein Jewelers of Novi</div>
+              </div>
             </div>
+            <span class="exp-type">Full-time</span>
           </div>
-          <span class="exp-type">Full-time</span>
-        </div>
-        <div class="exp-meta">
-          <div class="exp-meta-item">Jun 2022 – Aug 2024</div>
-          <div class="exp-meta-item">Novi, Michigan</div>
-          <div class="exp-meta-item">On-site</div>
-        </div>
-        <div class="exp-card-divider"></div>
-        <div class="exp-bullets">
-          <div class="exp-bullet">Drove 12% revenue growth by leveraging data to uncover sales trends and optimize promotions.</div>
-          <div class="exp-bullet">Built and maintained the company website with HTML, CSS, and JavaScript, boosting digital engagement.</div>
-        </div>
-        <div class="exp-skills">
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">Data Analysis</span>
+          <div class="exp-meta">
+            <div class="exp-meta-item">Jun 2022 – Aug 2024</div>
+            <div class="exp-meta-item">Novi, Michigan</div>
+            <div class="exp-meta-item">On-site</div>
+          </div>
+          <div class="exp-card-divider"></div>
+          <div class="exp-bullets">
+            <div class="exp-bullet">Drove 12% revenue growth by leveraging data to uncover sales trends and optimize promotions.</div>
+            <div class="exp-bullet">Built and maintained the company website with HTML, CSS, and JavaScript, boosting digital engagement.</div>
+          </div>
         </div>
       </div>
 
