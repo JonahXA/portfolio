@@ -4,96 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sprout — Jonah</title>
-  <meta name="description" content="Sprout — built by Jonah.">
+  <meta name="description" content="Sprout — interactive education platform built by Jonah.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="web.css">
   <style>
-    .sprout-page {
-      padding: 140px 0 var(--sec);
-    }
-
-    /* ── Logo ── */
-    .sprout-logo-block {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .sprout-logo-icon {
-      width: 52px;
-      height: 52px;
-      background: #16a34a;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .sprout-logo-icon svg {
-      width: 28px;
-      height: 28px;
-      color: #fff;
-    }
-
-    .sprout-logo-wordmark {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      color: var(--text);
-      line-height: 1;
-    }
-
-    .sprout-tagline {
-      font-size: 1.0625rem;
+    .sprout-bio {
+      font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
       color: var(--text-2);
-      margin-bottom: 64px;
-      max-width: 440px;
-      line-height: 1.65;
+      line-height: 1.75;
+      max-width: 680px;
+      margin-bottom: var(--sec);
     }
 
     /* ── Preview card ── */
+    .sprout-preview-wrap {
+      margin-bottom: var(--sec);
+    }
+
     .sprout-preview-link {
       display: block;
-      max-width: 900px;
-      border-radius: 16px;
+      border-radius: var(--radius);
       overflow: hidden;
       border: 1px solid var(--border-mid);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
       transition: transform 0.25s cubic-bezier(0.4,0,0.2,1),
                   box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
-      cursor: pointer;
       position: relative;
+      text-decoration: none;
     }
 
     .sprout-preview-link:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.11);
     }
 
     .sprout-preview-link:hover .sprout-preview-overlay {
       opacity: 1;
     }
 
-    .sprout-preview-img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      object-position: top;
-      background: var(--bg-alt);
-    }
-
-    /* Browser chrome bar above screenshot */
+    /* Browser chrome bar */
     .sprout-browser-bar {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 12px 18px;
+      padding: 11px 16px;
       background: #f5f5f7;
       border-bottom: 1px solid var(--border);
     }
@@ -101,6 +57,7 @@
     .sprout-browser-dots {
       display: flex;
       gap: 6px;
+      flex-shrink: 0;
     }
 
     .sprout-browser-dots span {
@@ -118,19 +75,28 @@
       flex: 1;
       background: #e8e8ed;
       border-radius: 6px;
-      padding: 5px 12px;
+      padding: 4px 12px;
       font-size: 12px;
       color: var(--text-2);
-      font-family: var(--font-mono);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
+    .sprout-preview-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top;
+      background: var(--bg-alt);
+    }
+
     .sprout-preview-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(22, 163, 74, 0.08);
+      background: rgba(0,0,0,0.04);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -152,16 +118,15 @@
     }
 
     .sprout-preview-overlay-pill svg {
-      width: 15px;
-      height: 15px;
+      width: 14px;
+      height: 14px;
     }
 
     .sprout-preview-caption {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 16px;
-      max-width: 900px;
+      margin-top: 12px;
     }
 
     .sprout-preview-caption-text {
@@ -177,6 +142,7 @@
       font-weight: 600;
       color: var(--text);
       transition: opacity var(--t);
+      text-decoration: none;
     }
 
     .sprout-visit-link:hover { opacity: 0.6; }
@@ -199,19 +165,29 @@
     </div>
   </nav>
 
-  <div class="sprout-page">
+  <!-- PAGE HERO -->
+  <div class="page-hero">
     <div class="container">
+      <div class="section-label" style="margin-bottom: 20px;">— Sprout</div>
+      <h1 class="page-title">Sprout</h1>
+      <p class="page-sub">An interactive education platform for K–12 students and career readiness.</p>
+    </div>
+  </div>
 
-      <p class="sprout-tagline fade-up">
-        Sprout is an interactive education platform built for K–12 students and career readiness programs. It uses scenario-based simulations — covering financial literacy, AI, entrepreneurship, and real-world decision-making — to teach students how to think through complex situations, not just memorize facts. I've led full-stack product development, platform architecture, and AI learning integrations, and have worked directly with universities and school districts to co-design and pilot the curriculum. Visit <strong>sproutnow.net</strong> to see the live product.
-      </p>
+  <div class="container">
 
-      <!-- Preview card -->
+    <!-- Bio -->
+    <p class="sprout-bio fade-up">
+      Sprout uses scenario-based simulations — covering financial literacy, AI, entrepreneurship, and real-world decision-making — to teach students how to think through complex situations, not just memorize facts. I've led full-stack product development, platform architecture, and AI learning integrations, and have worked directly with universities and school districts to co-design and pilot the curriculum.
+    </p>
+
+    <!-- Preview card -->
+    <div class="sprout-preview-wrap fade-up">
       <a
         href="https://sproutnow.net"
         target="_blank"
         rel="noopener"
-        class="sprout-preview-link fade-up"
+        class="sprout-preview-link"
         aria-label="Open sproutnow.net in a new tab"
       >
         <div class="sprout-browser-bar">
@@ -234,15 +210,15 @@
         </div>
       </a>
 
-      <div class="sprout-preview-caption fade-up">
+      <div class="sprout-preview-caption">
         <span class="sprout-preview-caption-text">Click to visit the live site</span>
         <a href="https://sproutnow.net" target="_blank" rel="noopener" class="sprout-visit-link">
           sproutnow.net
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>
       </div>
-
     </div>
+
   </div>
 
   <!-- FOOTER -->
