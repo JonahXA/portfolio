@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprout — Jonah</title>
+  <meta name="description" content="Sprout — built by Jonah.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="web.css">
+  <style>
+    .sprout-page {
+      padding: 140px 0 var(--sec);
+    }
+
+    /* ── Logo ── */
+    .sprout-logo-block {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .sprout-logo-icon {
+      width: 52px;
+      height: 52px;
+      background: #16a34a;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sprout-logo-icon svg {
+      width: 28px;
+      height: 28px;
+      color: #fff;
+    }
+
+    .sprout-logo-wordmark {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .sprout-tagline {
+      font-size: 1.0625rem;
+      color: var(--text-2);
+      margin-bottom: 64px;
+      max-width: 440px;
+      line-height: 1.65;
+    }
+
+    /* ── Preview card ── */
+    .sprout-preview-link {
+      display: block;
+      max-width: 900px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-mid);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+      transition: transform 0.25s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .sprout-preview-link:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    }
+
+    .sprout-preview-link:hover .sprout-preview-overlay {
+      opacity: 1;
+    }
+
+    .sprout-preview-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top;
+      background: var(--bg-alt);
+    }
+
+    /* Browser chrome bar above screenshot */
+    .sprout-browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      background: #f5f5f7;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sprout-browser-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .sprout-browser-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .sprout-browser-dots span:nth-child(1) { background: #ff5f57; }
+    .sprout-browser-dots span:nth-child(2) { background: #febc2e; }
+    .sprout-browser-dots span:nth-child(3) { background: #28c840; }
+
+    .sprout-browser-url {
+      flex: 1;
+      background: #e8e8ed;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 12px;
+      color: var(--text-2);
+      font-family: var(--font-mono);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sprout-preview-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(22, 163, 74, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.22s;
+    }
+
+    .sprout-preview-overlay-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+
+    .sprout-preview-overlay-pill svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .sprout-preview-caption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+      max-width: 900px;
+    }
+
+    .sprout-preview-caption-text {
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    .sprout-visit-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      transition: opacity var(--t);
+    }
+
+    .sprout-visit-link:hover { opacity: 0.6; }
+    .sprout-visit-link svg { width: 13px; height: 13px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Jonah</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="blog.html">Thoughts &amp; Books</a></li>
+        <li><a href="sprout.html" class="active">Sprout</a></li>
+        <li><a href="contact.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 13px;">Get in touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="sprout-page">
+    <div class="container">
+
+      <!-- Logo -->
+      <div class="sprout-logo-block fade-up">
+        <div class="sprout-logo-icon">
+          <!-- Sprout / leaf icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 20s4-9 14-7"/>
+            <path d="M7 20c0 0-1-6 3-10"/>
+            <path d="M7 20H3"/>
+          </svg>
+        </div>
+        <span class="sprout-logo-wordmark">Sprout</span>
+      </div>
+
+      <p class="sprout-tagline fade-up">
+        Visit <strong>sproutnow.net</strong> to see the live product.
+      </p>
+
+      <!-- Preview card -->
+      <a
+        href="https://sproutnow.net"
+        target="_blank"
+        rel="noopener"
+        class="sprout-preview-link fade-up"
+        aria-label="Open sproutnow.net in a new tab"
+      >
+        <div class="sprout-browser-bar">
+          <div class="sprout-browser-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="sprout-browser-url">sproutnow.net</div>
+        </div>
+        <img
+          class="sprout-preview-img"
+          src="https://image.thum.io/get/width/1800/crop/1125/https://sproutnow.net"
+          alt="Live preview of sproutnow.net"
+          loading="lazy"
+        >
+        <div class="sprout-preview-overlay">
+          <div class="sprout-preview-overlay-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Open sproutnow.net
+          </div>
+        </div>
+      </a>
+
+      <div class="sprout-preview-caption fade-up">
+        <span class="sprout-preview-caption-text">Click to visit the live site</span>
+        <a href="https://sproutnow.net" target="_blank" rel="noopener" class="sprout-visit-link">
+          sproutnow.net
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2025 Jonah. All rights reserved.</span>
+        <ul class="footer-links">
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Thoughts &amp; Books</a></li>
+          <li><a href="sprout.html">Sprout</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

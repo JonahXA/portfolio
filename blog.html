@@ -54,7 +54,7 @@
     /* ── Book Flip Card ── */
     .book-flip-card {
       perspective: 1100px;
-      height: 400px;
+      height: 360px;
     }
 
     .book-flip-card-inner {
@@ -78,40 +78,54 @@
       -webkit-backface-visibility: hidden;
     }
 
-    /* Front: full-bleed cover */
+    /* Front: cover image top 65%, info panel bottom 35% */
     .book-flip-card-front {
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
       border: 1px solid var(--border-mid);
+      background: var(--bg);
     }
 
-    .book-flip-card-front img {
-      width: 100%;
+    .book-flip-card-cover {
+      flex: 0 0 65%;
+      background: #f0ede8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .book-flip-card-cover img {
       height: 100%;
-      object-fit: cover;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
       display: block;
     }
 
-    .book-flip-card-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 40px 22px 22px;
-      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+    .book-flip-card-info {
+      flex: 1;
+      padding: 14px 18px 16px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .book-flip-card-title {
-      font-size: 1.0625rem;
+    .book-flip-card-info-title {
+      font-size: 0.9375rem;
       font-weight: 700;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.02em;
+      color: var(--text);
       line-height: 1.25;
-      color: #fff;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
-    .book-flip-card-author {
-      font-size: 12px;
-      color: rgba(255,255,255,0.62);
+    .book-flip-card-info-author {
+      font-size: 11.5px;
+      color: var(--text-3);
       font-weight: 450;
     }
 
@@ -139,7 +153,7 @@
       font-weight: 700;
       letter-spacing: -0.025em;
       color: #fff;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     .book-flip-card-back-author {
@@ -165,6 +179,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="blog.html" class="active">Thoughts &amp; Books</a></li>
+        <li><a href="sprout.html">Sprout</a></li>
         <li><a href="contact.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 13px;">Get in touch</a></li>
       </ul>
     </div>
@@ -185,7 +200,7 @@
     <div class="content-section">
       <div class="content-section-header">
         <h2 class="content-section-title">Thoughts</h2>
-        <p class="content-section-sub">Elaborated thoughts on things that matter.</p>
+        <p class="content-section-sub">Thoughts on what's caught my attention, shaped my thinking, or just won't leave me alone.</p>
       </div>
 
       <div class="blog-grid">
@@ -210,38 +225,32 @@
           </div>
         </a>
 
-        <div class="blog-card fade-up fade-up-delay-1" style="opacity: 0.5; pointer-events: none;">
+        <a href="american-psycho.html" class="blog-card fade-up fade-up-delay-1">
           <div class="blog-card-icon">
+            <!-- Film/clapperboard icon -->
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-1.98-3 2.5 2.5 0 0 1-1.32-4.24A3 3 0 0 1 5.5 6.5 2.5 2.5 0 0 1 9.5 2"/>
-              <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 1.98-3 2.5 2.5 0 0 0 1.32-4.24A3 3 0 0 0 18.5 6.5 2.5 2.5 0 0 0 14.5 2"/>
+              <rect x="2" y="2" width="20" height="20" rx="2.18"/>
+              <line x1="7" y1="2" x2="7" y2="22"/>
+              <line x1="17" y1="2" x2="17" y2="22"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <line x1="2" y1="7" x2="7" y2="7"/>
+              <line x1="2" y1="17" x2="7" y2="17"/>
+              <line x1="17" y1="17" x2="22" y2="17"/>
+              <line x1="17" y1="7" x2="22" y2="7"/>
             </svg>
           </div>
           <div class="blog-card-body">
-            <div class="blog-card-label">Coming Soon</div>
-            <h2 class="blog-card-title">Controlling Your Emotions vs. Emotions Controlling You</h2>
-            <p class="blog-card-excerpt">On emotional self-regulation — the difference between responding and reacting, and how to build the discipline to choose.</p>
+            <div class="blog-card-label">Essay</div>
+            <h2 class="blog-card-title">American Psycho</h2>
+            <p class="blog-card-excerpt">What the film gets right about identity, performance, and the hollow pursuit of status — and why it still resonates.</p>
             <div class="blog-card-footer">
-              <span class="blog-card-read" style="color: var(--text-3);">In progress</span>
+              <span class="blog-card-read">
+                Read essay
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
             </div>
           </div>
-        </div>
-
-        <div class="blog-card fade-up fade-up-delay-2" style="opacity: 0.5; pointer-events: none;">
-          <div class="blog-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-            </svg>
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-label">Coming Soon</div>
-            <h2 class="blog-card-title">Motivation &amp; Discipline</h2>
-            <p class="blog-card-excerpt">Why motivation is unreliable and discipline is underrated — and how to build systems that don't depend on feeling inspired.</p>
-            <div class="blog-card-footer">
-              <span class="blog-card-read" style="color: var(--text-3);">In progress</span>
-            </div>
-          </div>
-        </div>
+        </a>
 
       </div>
     </div>
@@ -259,14 +268,16 @@
           <div class="book-flip-card-inner">
 
             <div class="book-flip-card-front">
-              <img
-                src="https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
-                alt="Atomic Habits by James Clear"
-                loading="lazy"
-              >
-              <div class="book-flip-card-overlay">
-                <div class="book-flip-card-title">Atomic Habits</div>
-                <div class="book-flip-card-author">James Clear</div>
+              <div class="book-flip-card-cover">
+                <img
+                  src="https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
+                  alt="Atomic Habits by James Clear"
+                  loading="lazy"
+                >
+              </div>
+              <div class="book-flip-card-info">
+                <div class="book-flip-card-info-title">Atomic Habits</div>
+                <div class="book-flip-card-info-author">James Clear</div>
               </div>
             </div>
 
@@ -293,6 +304,7 @@
         <ul class="footer-links">
           <li><a href="projects.html">Projects</a></li>
           <li><a href="blog.html">Thoughts &amp; Books</a></li>
+          <li><a href="sprout.html">Sprout</a></li>
         </ul>
       </div>
     </div>
