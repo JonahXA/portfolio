@@ -3,12 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Writing — Jonah</title>
-  <meta name="description" content="Essays and thoughts by Jonah on growth, focus, and the things I'm learning.">
+  <title>Thoughts & Books — Jonah</title>
+  <meta name="description" content="Essays, thoughts, and books by Jonah.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="web.css">
+  <style>
+    /* ── Section subheaders ── */
+    .content-section {
+      padding: var(--sec) 0 0;
+    }
+
+    .content-section:last-of-type {
+      padding-bottom: var(--sec);
+    }
+
+    .content-section-header {
+      margin-bottom: 40px;
+    }
+
+    .content-section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .content-section-sub {
+      font-size: 0.9375rem;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+
+    /* ── Blog card: no image variant ── */
+    .blog-card-icon {
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, var(--bg-alt) 0%, #e8e8ed 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .blog-card-icon svg {
+      width: 40px;
+      height: 40px;
+      color: #c7c7cc;
+    }
+
+    /* ── Book list ── */
+    .book-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .book-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .book-row:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .book-cover {
+      width: 52px;
+      height: 72px;
+      border-radius: 6px;
+      background: linear-gradient(160deg, var(--bg-alt) 0%, #e2e2e7 100%);
+      border: 1px solid var(--border-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .book-cover svg {
+      width: 22px;
+      height: 22px;
+      color: #c7c7cc;
+    }
+
+    .book-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .book-title {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .book-author {
+      font-size: 13px;
+      color: var(--text-3);
+      margin-bottom: 12px;
+    }
+
+    .book-takeaway {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    .book-meta {
+      flex-shrink: 0;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-3);
+      padding-top: 3px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 560px) {
+      .book-meta { display: none; }
+    }
+  </style>
 </head>
 <body>
 
@@ -30,65 +147,127 @@
   <div class="page-hero">
     <div class="container">
       <div class="section-label" style="margin-bottom: 20px;">Writing</div>
-      <h1 class="page-title">Thoughts &amp; essays</h1>
-      <p class="page-sub">A place to expand on ideas — personal, professional, and everything in between.</p>
+      <h1 class="page-title">Thoughts &amp; Books</h1>
+      <p class="page-sub">Ideas worth expanding on, and the books behind them.</p>
     </div>
   </div>
 
-  <!-- ARTICLES -->
   <div class="container">
-    <div class="blog-grid">
 
-      <a href="Repitition &amp; Growth.html" class="blog-card fade-up">
-        <div class="blog-card-img">
-          <img src="Art1.png" alt="Repetition &amp; Growth" onerror="this.parentElement.innerHTML='<div class=\'blog-card-img-placeholder\'>✦</div>'">
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-card-label">Personal Essay</div>
-          <h2 class="blog-card-title">Repetition &amp; Growth</h2>
-          <p class="blog-card-excerpt">On the underrated power of doing the same thing again and again — and what consistent effort quietly builds over time.</p>
-          <div class="blog-card-footer">
-            <span class="blog-card-read">
-              Read essay
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </div>
-        </div>
-      </a>
-
-      <div class="blog-card fade-up fade-up-delay-1" style="opacity: 0.5; pointer-events: none;">
-        <div class="blog-card-img">
-          <div class="blog-card-img-placeholder">◎</div>
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-card-label">Coming Soon</div>
-          <h2 class="blog-card-title">Controlling Your Emotions vs. Emotions Controlling You</h2>
-          <p class="blog-card-excerpt">On emotional self-regulation — understanding the difference between responding and reacting, and how to build the discipline to choose.</p>
-          <div class="blog-card-footer">
-            <span class="blog-card-read" style="color: var(--text-3);">In progress</span>
-          </div>
-        </div>
+    <!-- ── THOUGHTS ── -->
+    <div class="content-section">
+      <div class="content-section-header">
+        <h2 class="content-section-title">Thoughts</h2>
+        <p class="content-section-sub">Elaborated thoughts on things that matter.</p>
       </div>
 
-      <div class="blog-card fade-up fade-up-delay-2" style="opacity: 0.5; pointer-events: none;">
-        <div class="blog-card-img">
-          <div class="blog-card-img-placeholder">◈</div>
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-card-label">Coming Soon</div>
-          <h2 class="blog-card-title">Motivation &amp; Discipline</h2>
-          <p class="blog-card-excerpt">Why motivation is unreliable and discipline is underrated — and how to build systems that don't depend on feeling inspired.</p>
-          <div class="blog-card-footer">
-            <span class="blog-card-read" style="color: var(--text-3);">In progress</span>
+      <div class="blog-grid">
+
+        <a href="Repitition &amp; Growth.html" class="blog-card fade-up">
+          <div class="blog-card-icon">
+            <!-- PenLine icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/>
+              <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-label">Personal Essay</div>
+            <h2 class="blog-card-title">Repetition &amp; Growth</h2>
+            <p class="blog-card-excerpt">On the underrated power of doing the same thing again and again — and what consistent effort quietly builds over time.</p>
+            <div class="blog-card-footer">
+              <span class="blog-card-read">
+                Read essay
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <div class="blog-card fade-up fade-up-delay-1" style="opacity: 0.5; pointer-events: none;">
+          <div class="blog-card-icon">
+            <!-- Brain/mind icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-1.98-3 2.5 2.5 0 0 1-1.32-4.24A3 3 0 0 1 5.5 6.5 2.5 2.5 0 0 1 9.5 2"/>
+              <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 1.98-3 2.5 2.5 0 0 0 1.32-4.24A3 3 0 0 0 18.5 6.5 2.5 2.5 0 0 0 14.5 2"/>
+            </svg>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-label">Coming Soon</div>
+            <h2 class="blog-card-title">Controlling Your Emotions vs. Emotions Controlling You</h2>
+            <p class="blog-card-excerpt">On emotional self-regulation — understanding the difference between responding and reacting, and how to build the discipline to choose.</p>
+            <div class="blog-card-footer">
+              <span class="blog-card-read" style="color: var(--text-3);">In progress</span>
+            </div>
           </div>
         </div>
-      </div>
 
+        <div class="blog-card fade-up fade-up-delay-2" style="opacity: 0.5; pointer-events: none;">
+          <div class="blog-card-icon">
+            <!-- Zap icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-label">Coming Soon</div>
+            <h2 class="blog-card-title">Motivation &amp; Discipline</h2>
+            <p class="blog-card-excerpt">Why motivation is unreliable and discipline is underrated — and how to build systems that don't depend on feeling inspired.</p>
+            <div class="blog-card-footer">
+              <span class="blog-card-read" style="color: var(--text-3);">In progress</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
+    <!-- ── BOOKS ── -->
+    <div class="content-section">
+      <div class="content-section-header">
+        <h2 class="content-section-title">Books</h2>
+        <p class="content-section-sub">I set out to read more in 2026 — recording my finished books and biggest takeaways here.</p>
+      </div>
+
+      <div class="book-list fade-up">
+
+        <div class="book-row">
+          <div class="book-cover">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+          <div class="book-info">
+            <div class="book-title">Deep Work</div>
+            <div class="book-author">Cal Newport</div>
+            <p class="book-takeaway">The ability to focus without distraction is increasingly rare and increasingly valuable. Protecting long blocks of uninterrupted work is a competitive advantage, not just a productivity tip.</p>
+          </div>
+          <div class="book-meta">2026</div>
+        </div>
+
+        <div class="book-row">
+          <div class="book-cover">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+          <div class="book-info">
+            <div class="book-title">The Almanack of Naval Ravikant</div>
+            <div class="book-author">Eric Jorgenson</div>
+            <p class="book-takeaway">Wealth is built through specific knowledge and leverage, not through trading time for money. Seek work that feels like play to you but looks like work to others.</p>
+          </div>
+          <div class="book-meta">2026</div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
   <!-- FOOTER -->
-  <footer class="footer" style="margin-top: var(--sec);">
+  <footer class="footer">
     <div class="container">
       <div class="footer-inner">
         <span class="footer-copy">© 2025 Jonah. All rights reserved.</span>
@@ -109,13 +288,9 @@
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in');
-          observer.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
       });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   </script>
 </body>
