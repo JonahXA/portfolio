@@ -4,23 +4,270 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sprout — Jonah</title>
-  <meta name="description" content="Sprout — interactive education platform built by Jonah.">
+  <meta name="description" content="Sprout — interactive education platform for K–12 students built by Jonah.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="web.css">
   <style>
-    .sprout-bio {
-      font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
-      color: var(--text-2);
-      line-height: 1.75;
-      max-width: 680px;
-      margin-bottom: var(--sec);
+
+    /* ── Hero ── */
+    .sprout-hero {
+      padding: clamp(120px, 16vw, 180px) 0 clamp(72px, 10vw, 112px);
+      border-bottom: 1px solid var(--border);
     }
 
-    /* ── Preview card ── */
-    .sprout-preview-wrap {
-      margin-bottom: var(--sec);
+    .sprout-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease) 0.05s forwards;
+    }
+
+    .sprout-hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--text-3);
+      flex-shrink: 0;
+    }
+
+    .sprout-hero-title {
+      font-size: clamp(3.75rem, 10vw, 8rem);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 0.93;
+      color: var(--text);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease) 0.12s forwards;
+    }
+
+    .sprout-hero-sub {
+      font-size: clamp(1rem, 2vw, 1.1875rem);
+      color: var(--text-2);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease) 0.2s forwards;
+    }
+
+    .sprout-hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease) 0.28s forwards;
+    }
+
+    /* ── Meta strip ── */
+    .sprout-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sprout-meta-item {
+      padding: 32px 0;
+      border-right: 1px solid var(--border);
+      padding-right: clamp(24px, 4vw, 56px);
+    }
+
+    .sprout-meta-item + .sprout-meta-item {
+      padding-left: clamp(24px, 4vw, 56px);
+    }
+
+    .sprout-meta-item:last-child {
+      border-right: none;
+    }
+
+    .sprout-meta-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 8px;
+    }
+
+    .sprout-meta-value {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    /* ── Sections ── */
+    .sprout-section {
+      padding: var(--sec) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sprout-section-alt {
+      background: var(--bg-alt);
+    }
+
+    /* ── Two-column layout ── */
+    .sprout-two-col {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: clamp(40px, 8vw, 96px);
+      align-items: start;
+    }
+
+    .sprout-col-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 12px;
+    }
+
+    .sprout-col-heading {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+    }
+
+    /* ── Body text ── */
+    .sprout-body p {
+      font-size: 1rem;
+      color: var(--text-2);
+      line-height: 1.78;
+    }
+
+    .sprout-body p + p {
+      margin-top: 18px;
+    }
+
+    /* ── Feature list ── */
+    .sprout-feature-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sprout-feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sprout-feature-item:first-child {
+      border-top: 1px solid var(--border);
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .sprout-feature-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .sprout-feature-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--bg-alt2);
+      border: 1px solid var(--border-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .sprout-feature-icon svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-2);
+    }
+
+    .sprout-feature-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .sprout-feature-desc {
+      font-size: 0.875rem;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+
+    /* ── Simulation cards ── */
+    .sprout-sims-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .sprout-sim-card {
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius);
+      padding: 24px 20px 22px;
+      background: var(--bg);
+      transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+    }
+
+    .sprout-sim-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+    }
+
+    .sprout-sim-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .sprout-sim-icon svg {
+      width: 17px;
+      height: 17px;
+      color: var(--text-2);
+    }
+
+    .sprout-sim-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: -0.018em;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .sprout-sim-desc {
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+
+    /* ── Product showcase ── */
+    .sprout-showcase-heading {
+      margin-bottom: 28px;
     }
 
     .sprout-preview-link {
@@ -28,23 +275,21 @@
       border-radius: var(--radius);
       overflow: hidden;
       border: 1px solid var(--border-mid);
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-      transition: transform 0.25s cubic-bezier(0.4,0,0.2,1),
-                  box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04);
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
       position: relative;
       text-decoration: none;
     }
 
     .sprout-preview-link:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.11);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.05);
     }
 
-    .sprout-preview-link:hover .sprout-preview-overlay {
+    .sprout-preview-link:hover .sprout-overlay {
       opacity: 1;
     }
 
-    /* Browser chrome bar */
     .sprout-browser-bar {
       display: flex;
       align-items: center;
@@ -93,7 +338,7 @@
       background: var(--bg-alt);
     }
 
-    .sprout-preview-overlay {
+    .sprout-overlay {
       position: absolute;
       inset: 0;
       background: rgba(0,0,0,0.04);
@@ -104,12 +349,12 @@
       transition: opacity 0.22s;
     }
 
-    .sprout-preview-overlay-pill {
+    .sprout-overlay-pill {
       display: flex;
       align-items: center;
       gap: 8px;
       padding: 12px 22px;
-      background: rgba(255,255,255,0.95);
+      background: rgba(255,255,255,0.96);
       border-radius: 100px;
       font-size: 14px;
       font-weight: 600;
@@ -117,16 +362,16 @@
       box-shadow: 0 4px 24px rgba(0,0,0,0.12);
     }
 
-    .sprout-preview-overlay-pill svg {
-      width: 14px;
-      height: 14px;
+    .sprout-overlay-pill svg {
+      width: 13px;
+      height: 13px;
     }
 
     .sprout-preview-caption {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
     .sprout-preview-caption-text {
@@ -147,6 +392,42 @@
 
     .sprout-visit-link:hover { opacity: 0.6; }
     .sprout-visit-link svg { width: 13px; height: 13px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .sprout-two-col {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .sprout-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .sprout-meta-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 24px 0;
+      }
+
+      .sprout-meta-item + .sprout-meta-item {
+        padding-left: 0;
+      }
+
+      .sprout-meta-item:last-child {
+        border-bottom: none;
+      }
+
+      .sprout-sims-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .sprout-sims-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -165,29 +446,154 @@
     </div>
   </nav>
 
-  <!-- PAGE HERO -->
-  <div class="page-hero">
+  <!-- ── HERO ── -->
+  <div class="sprout-hero">
     <div class="container">
-      <div class="section-label" style="margin-bottom: 20px;">— Sprout</div>
-      <h1 class="page-title">Sprout</h1>
-      <p class="page-sub">An interactive education platform for K–12 students and career readiness.</p>
+      <div class="sprout-hero-eyebrow">Case Study</div>
+      <h1 class="sprout-hero-title">Sprout</h1>
+      <p class="sprout-hero-sub">An interactive education platform teaching students how to think through complex, real-world decisions — not just memorize answers.</p>
+      <div class="sprout-hero-actions">
+        <a href="https://sproutnow.net" target="_blank" rel="noopener" class="btn btn-dark">
+          Visit sproutnow.net
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 
+  <!-- ── META STRIP ── -->
   <div class="container">
+    <div class="sprout-meta fade-up">
+      <div class="sprout-meta-item">
+        <div class="sprout-meta-label">My Role</div>
+        <div class="sprout-meta-value">Product & Engineering Lead</div>
+      </div>
+      <div class="sprout-meta-item">
+        <div class="sprout-meta-label">Domain</div>
+        <div class="sprout-meta-value">K–12 Education Technology</div>
+      </div>
+      <div class="sprout-meta-item">
+        <div class="sprout-meta-label">Status</div>
+        <div class="sprout-meta-value">Live — sproutnow.net</div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Bio -->
-    <p class="sprout-bio fade-up">
-      Sprout uses scenario-based simulations — covering financial literacy, AI, entrepreneurship, and real-world decision-making — to teach students how to think through complex situations, not just memorize facts. I've led full-stack product development, platform architecture, and AI learning integrations, and have worked directly with universities and school districts to co-design and pilot the curriculum.
-    </p>
+  <!-- ── OVERVIEW ── -->
+  <div class="sprout-section">
+    <div class="container">
+      <div class="sprout-two-col">
+        <div class="fade-up">
+          <div class="sprout-col-label">Overview</div>
+          <h2 class="sprout-col-heading">What is<br>Sprout?</h2>
+        </div>
+        <div class="sprout-body fade-up fade-up-delay-1">
+          <p>Sprout is a K–12 education platform built around the idea that students learn better by doing. Instead of passive instruction, Sprout puts students inside real-world scenarios — financial decisions, business tradeoffs, technology ethics, career choices — and asks them to reason through the outcome.</p>
+          <p>It's designed for both classroom use and career readiness programs, with curriculum co-designed alongside universities and school districts. The goal isn't engagement for its own sake — it's building the kind of thinking that actually transfers into adult life.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Preview card -->
-    <div class="sprout-preview-wrap fade-up">
+  <!-- ── SIMULATIONS ── -->
+  <div class="sprout-section sprout-section-alt">
+    <div class="container">
+      <div class="sprout-two-col">
+        <div class="fade-up">
+          <div class="sprout-col-label">Simulations</div>
+          <h2 class="sprout-col-heading">What students learn</h2>
+        </div>
+        <div class="fade-up fade-up-delay-1">
+          <div class="sprout-sims-grid" style="margin-top: 0; grid-template-columns: repeat(2, 1fr);">
+            <div class="sprout-sim-card">
+              <div class="sprout-sim-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="sprout-sim-title">Financial Literacy</div>
+              <div class="sprout-sim-desc">Budgeting, investing, debt management, and real money decisions.</div>
+            </div>
+            <div class="sprout-sim-card">
+              <div class="sprout-sim-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+              </div>
+              <div class="sprout-sim-title">AI & Future Work</div>
+              <div class="sprout-sim-desc">Navigating automation, evaluating AI tools, and future-proofing careers.</div>
+            </div>
+            <div class="sprout-sim-card">
+              <div class="sprout-sim-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <div class="sprout-sim-title">Entrepreneurship</div>
+              <div class="sprout-sim-desc">Starting a business, validating ideas, managing resources and risk.</div>
+            </div>
+            <div class="sprout-sim-card">
+              <div class="sprout-sim-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+              </div>
+              <div class="sprout-sim-title">Decision-Making</div>
+              <div class="sprout-sim-desc">Ethical reasoning, consequence analysis, and high-stakes choices.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MY ROLE ── -->
+  <div class="sprout-section">
+    <div class="container">
+      <div class="sprout-two-col">
+        <div class="fade-up">
+          <div class="sprout-col-label">Engineering</div>
+          <h2 class="sprout-col-heading">What<br>I built</h2>
+        </div>
+        <div class="fade-up fade-up-delay-1">
+          <div class="sprout-feature-list">
+            <div class="sprout-feature-item">
+              <div class="sprout-feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              </div>
+              <div>
+                <div class="sprout-feature-title">Full-Stack Platform</div>
+                <div class="sprout-feature-desc">Designed and built the complete product from the ground up — frontend, backend, and infrastructure architecture.</div>
+              </div>
+            </div>
+            <div class="sprout-feature-item">
+              <div class="sprout-feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              </div>
+              <div>
+                <div class="sprout-feature-title">AI Learning Integrations</div>
+                <div class="sprout-feature-desc">Embedded AI-driven feedback and adaptive content pathways directly into the simulation engine.</div>
+              </div>
+            </div>
+            <div class="sprout-feature-item">
+              <div class="sprout-feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <div class="sprout-feature-title">Institutional Partnerships</div>
+                <div class="sprout-feature-desc">Collaborated with universities and school districts to co-design the curriculum and run district-level pilots.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PRODUCT SHOWCASE ── -->
+  <div class="sprout-section sprout-section-alt">
+    <div class="container">
+      <div class="sprout-showcase-heading fade-up">
+        <div class="sprout-col-label">Live Product</div>
+        <h2 class="sprout-col-heading">See it in action</h2>
+      </div>
       <a
         href="https://sproutnow.net"
         target="_blank"
         rel="noopener"
-        class="sprout-preview-link"
+        class="sprout-preview-link fade-up"
         aria-label="Open sproutnow.net in a new tab"
       >
         <div class="sprout-browser-bar">
@@ -202,23 +608,21 @@
           alt="Live preview of sproutnow.net"
           loading="lazy"
         >
-        <div class="sprout-preview-overlay">
-          <div class="sprout-preview-overlay-pill">
+        <div class="sprout-overlay">
+          <div class="sprout-overlay-pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             Open sproutnow.net
           </div>
         </div>
       </a>
-
-      <div class="sprout-preview-caption">
-        <span class="sprout-preview-caption-text">Click to visit the live site</span>
+      <div class="sprout-preview-caption fade-up">
+        <span class="sprout-preview-caption-text">Click to visit the live product</span>
         <a href="https://sproutnow.net" target="_blank" rel="noopener" class="sprout-visit-link">
           sproutnow.net
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>
       </div>
     </div>
-
   </div>
 
   <!-- FOOTER -->
