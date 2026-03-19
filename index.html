@@ -3,46 +3,352 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home - Jonah's Portfolio</title>
+  <title>Jonah — Software Engineer & Builder</title>
+  <meta name="description" content="Software engineer and builder focused on data, machine learning, and full-stack products.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="web.css">
 </head>
 <body>
-  <header>
-    <h1>Jonah's Portfolio</h1>
-    <nav>
-      <ul>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Jonah</a>
+      <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="blog.html">Blog</a></li>
+        <li><a href="blog.html">Writing</a></li>
         <li><a href="resume.html">Resume</a></li>
+        <li><a href="#contact" class="btn btn-outline" style="padding: 8px 20px; font-size: 13px;">Get in touch</a></li>
       </ul>
-    </nav>
-  </header>
-  
-  <main>
-    <section class="welcome">
-      <h2>Welcome</h2>
-      <p>Personal Projects, thoughts, and endeavors. Feel free to explore.</p>
-    </section>
-    
-    <!-- Client Testimonials Section -->
-    <section class="testimonials">
-      <h2>Client Testimonials</h2>
-      <div class="testimonial">
-        <h3>WeCLEAN Inc.</h3>
-        <p>"Had a great experience working with Jonah! He made a beautiful website in a timely manor tailored to exactly what we were looking for. Solid communication from start to finish, did a great job of keeping us in the loop. No complaints would recommend!"</p>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container" style="position: relative;">
+      <div class="hero-eyebrow">Software Engineer &amp; Builder</div>
+      <h1 class="hero-headline">
+        Building things<br>
+        <em>that matter.</em>
+      </h1>
+      <p class="hero-sub">
+        I design and engineer software at the intersection of data, machine learning, and product — focused on depth, craft, and real-world impact.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-dark">View my work</a>
+        <a href="#contact" class="btn btn-outline">Get in touch</a>
       </div>
-      <div class="testimonial">
-        <h3>Chromatic Varsity</h3>
-        <p>Currently working.</p>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-label">Featured Work</div>
+        <h2 class="section-title">Projects I've built</h2>
+        <p class="section-desc">A selection of work spanning data engineering, machine learning, and applied software.</p>
       </div>
-    </section>
-  </main>
-  
-  <footer>
-    <p>&copy; 2025 Jonah's Portfolio. All rights reserved.</p>
+
+      <div class="projects-list">
+
+        <!-- Project 01 -->
+        <div class="project-row fade-up">
+          <span class="project-num">01</span>
+          <div class="project-row-body">
+            <h3 class="project-row-title">Crypto Analysis Pipeline</h3>
+            <p class="project-row-desc">
+              A computational pipeline that processes historical cryptocurrency data to assess risk-return profiles, simulate investment scenarios, and surface actionable insights into long-term portfolio strategy. Built to handle multi-asset comparisons and stress-test assumptions across market conditions.
+            </p>
+            <div class="project-stack">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">NumPy</span>
+              <span class="tag">Matplotlib</span>
+              <span class="tag">SciPy</span>
+            </div>
+          </div>
+          <div class="project-row-side">
+            <div class="project-metric">
+              <div class="project-metric-value">3yr+</div>
+              <div class="project-metric-label">Historical data analyzed</div>
+            </div>
+            <div class="project-link-group">
+              <a href="crypto analysis.html" class="proj-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Full Analysis
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 02 -->
+        <div class="project-row fade-up fade-up-delay-1">
+          <span class="project-num">02</span>
+          <div class="project-row-body">
+            <h3 class="project-row-title">Chess ML Model</h3>
+            <p class="project-row-desc">
+              A machine learning model trained on large-scale chess datasets to evaluate board positions and generate optimized move sequences. Explores how neural networks can encode positional understanding and tactical patterns that emerge from millions of grandmaster games.
+            </p>
+            <div class="project-stack">
+              <span class="tag">Python</span>
+              <span class="tag">PyTorch</span>
+              <span class="tag">chess.py</span>
+              <span class="tag">NumPy</span>
+            </div>
+          </div>
+          <div class="project-row-side">
+            <span class="status-badge status-badge-wip">In progress</span>
+          </div>
+        </div>
+
+        <!-- Project 03 -->
+        <div class="project-row fade-up fade-up-delay-2">
+          <span class="project-num">03</span>
+          <div class="project-row-body">
+            <h3 class="project-row-title">Cyber Breach Analysis</h3>
+            <p class="project-row-desc">
+              An analysis of large-scale breach and incident report datasets to identify patterns in cybersecurity failures, correlate attack vectors with industry sectors, and determine which security measures correlate with reduced incident severity and frequency.
+            </p>
+            <div class="project-stack">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">Seaborn</span>
+              <span class="tag">Scikit-learn</span>
+            </div>
+          </div>
+          <div class="project-row-side">
+            <span class="status-badge">Completed</span>
+          </div>
+        </div>
+
+        <!-- Project 04 -->
+        <div class="project-row fade-up fade-up-delay-3">
+          <span class="project-num">04</span>
+          <div class="project-row-body">
+            <h3 class="project-row-title">WeCLEAN — Web Platform</h3>
+            <p class="project-row-desc">
+              Designed and developed a full client website for WeCLEAN Inc. — a professional cleaning services business. Delivered a clean, conversion-focused experience with responsive layout, service pages, and strong branding. Shipped on time with clear communication throughout.
+            </p>
+            <div class="project-stack">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="project-row-side">
+            <span class="status-badge">Live</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="fade-up" style="margin-top: 48px;">
+        <a href="projects.html" class="btn btn-outline">All projects →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section section-alt" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-body fade-up">
+          <div class="section-label">About</div>
+          <h2 class="about-heading">Engineer at heart,<br>builder by nature.</h2>
+          <p>I'm a software engineer drawn to problems at the edge of data and product. I like building things that are both technically sound and genuinely useful — whether that's a data pipeline, an ML model, or a client-facing web product.</p>
+          <p>My work sits at the intersection of analysis, engineering, and execution. I care about depth over breadth — understanding systems well enough to make them better, not just make them work.</p>
+          <p>Currently exploring machine learning, data infrastructure, and applied AI. Always interested in projects with a clear purpose and real-world stakes.</p>
+          <div class="about-cta">
+            <a href="resume.html" class="btn btn-outline">View resume</a>
+          </div>
+        </div>
+
+        <div class="skills-col fade-up fade-up-delay-2">
+          <div class="skill-block">
+            <div class="skill-block-label">Languages</div>
+            <div class="skill-pills">
+              <span class="skill-pill">Python</span>
+              <span class="skill-pill">JavaScript</span>
+              <span class="skill-pill">SQL</span>
+              <span class="skill-pill">HTML / CSS</span>
+            </div>
+          </div>
+          <div class="skill-block">
+            <div class="skill-block-label">ML &amp; Data</div>
+            <div class="skill-pills">
+              <span class="skill-pill">PyTorch</span>
+              <span class="skill-pill">Scikit-learn</span>
+              <span class="skill-pill">Pandas</span>
+              <span class="skill-pill">NumPy</span>
+              <span class="skill-pill">Matplotlib</span>
+            </div>
+          </div>
+          <div class="skill-block">
+            <div class="skill-block-label">Tools &amp; Stack</div>
+            <div class="skill-pills">
+              <span class="skill-pill">Git</span>
+              <span class="skill-pill">VS Code</span>
+              <span class="skill-pill">Jupyter</span>
+              <span class="skill-pill">Linux</span>
+            </div>
+          </div>
+          <div class="skill-block">
+            <div class="skill-block-label">Domains</div>
+            <div class="skill-pills">
+              <span class="skill-pill">Data Engineering</span>
+              <span class="skill-pill">Machine Learning</span>
+              <span class="skill-pill">Cybersecurity</span>
+              <span class="skill-pill">Web Development</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-label">Client Work</div>
+        <h2 class="section-title">What clients say</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-up">
+          <p class="testimonial-text">
+            Had a great experience working with Jonah! He made a beautiful website in a timely manner tailored to exactly what we were looking for. Solid communication from start to finish, did a great job of keeping us in the loop. No complaints — would recommend!
+          </p>
+          <div class="testimonial-client">
+            <div class="testimonial-avatar">W</div>
+            <div>
+              <div class="testimonial-client-name">WeCLEAN Inc.</div>
+              <div class="testimonial-client-role">Website design &amp; development</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-up fade-up-delay-1">
+          <p class="testimonial-text">
+            Currently collaborating on a new project. More details to follow as the engagement progresses.
+          </p>
+          <div class="testimonial-client">
+            <div class="testimonial-avatar">C</div>
+            <div>
+              <div class="testimonial-client-name">Chromatic Varsity</div>
+              <div class="testimonial-client-role">Ongoing engagement</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section class="section section-alt" id="writing">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-label">Writing</div>
+        <h2 class="section-title">Thoughts &amp; essays</h2>
+        <p class="section-desc">Personal and professional reflections — on growth, focus, and the things I'm learning.</p>
+      </div>
+
+      <div class="writing-list fade-up">
+        <a href="Repitition &amp; Growth.html" class="writing-row">
+          <div class="writing-info">
+            <div class="writing-title">Repetition &amp; Growth</div>
+            <div class="writing-meta">Personal essay</div>
+          </div>
+          <svg class="writing-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="writing-row">
+          <div class="writing-info">
+            <div class="writing-title">Controlling Your Emotions vs. Emotions Controlling You</div>
+            <div class="writing-meta">Coming soon</div>
+          </div>
+          <svg class="writing-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="writing-row">
+          <div class="writing-info">
+            <div class="writing-title">Motivation &amp; Discipline</div>
+            <div class="writing-meta">Coming soon</div>
+          </div>
+          <svg class="writing-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="fade-up" style="margin-top: 40px;">
+        <a href="blog.html" class="btn btn-outline">All writing →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <h2 class="contact-headline fade-up">Let's build<br>something great.</h2>
+      <p class="contact-sub fade-up fade-up-delay-1">Open to interesting projects, collaborations, and conversations.</p>
+      <div class="contact-actions fade-up fade-up-delay-2">
+        <a href="mailto:hello@jonahxx.com" class="btn btn-dark">Send an email</a>
+        <a href="resume.html" class="btn btn-outline">View resume</a>
+      </div>
+      <div class="contact-divider fade-up fade-up-delay-3">
+        <a href="https://github.com/" target="_blank" rel="noopener" class="contact-social">GitHub</a>
+        <div class="contact-dot"></div>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener" class="contact-social">LinkedIn</a>
+        <div class="contact-dot"></div>
+        <a href="https://twitter.com/" target="_blank" rel="noopener" class="contact-social">Twitter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2025 Jonah. All rights reserved.</span>
+        <ul class="footer-links">
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Writing</a></li>
+          <li><a href="resume.html">Resume</a></li>
+        </ul>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Scroll-triggered fade-up
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-
-

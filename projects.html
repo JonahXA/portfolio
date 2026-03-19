@@ -3,49 +3,182 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects - Jonah's Portfolio</title>
+  <title>Projects — Jonah</title>
+  <meta name="description" content="Software projects by Jonah — spanning data engineering, machine learning, and full-stack development.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="web.css">
 </head>
 <body>
-  <header>
-    <h1>Jonah's Portfolio</h1>
-    <nav>
-      <ul>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Jonah</a>
+      <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html" class="active">Projects</a></li>
-        <li><a href="blog.html">Blog</a></li>
+        <li><a href="blog.html">Writing</a></li>
         <li><a href="resume.html">Resume</a></li>
+        <li><a href="index.html#contact" class="btn btn-outline" style="padding: 8px 20px; font-size: 13px;">Get in touch</a></li>
       </ul>
-    </nav>
-  </header>
-  
-  <main>
-    <section class="projects">
-      <h2>Featured Projects</h2>
-      <div class="project">
-        <h3>Crypto Analysis Pipeline</h3>
-        <p>This project leverages historical cryptocurrency data and computational modeling to assess risk-return profiles and simulate investment outcomes, providing actionable insights into optimal long-term investment strategies.</p>
-        <a href="crypto_analysis.html" class="project-link">Full Analysis</a>
-      </div>
-      <div class="project">
-        <h3>Chess Machine Learning Model</h3>
-        <p>Levaraging chess datasets to evaluate positions and generate optimized sets of moves.</p>
-      </div>
-      <div class="project">
-        <h3>Cyber Breach Analysis</h3>
-        <p>Using breach and incident report datasets to examine patterns in cybersecurity incidents, helping identify which security measures are most effective.
-.</p>
-      </div>
-      <!-- Additional projects can be added here -->
-    </section>
-  </main>
-  
-  <footer>
-    <p>&copy; 2025 Jonah's Portfolio. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+    </div>
+  </nav>
 
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label" style="margin-bottom: 20px;">Portfolio</div>
+      <h1 class="page-title">Projects</h1>
+      <p class="page-sub">Data pipelines, ML models, and web products — built with focus on technical depth and real outcomes.</p>
+    </div>
+  </div>
+
+  <!-- PROJECTS LIST -->
+  <div class="projects-page-list">
+    <div class="container">
+      <div class="projects-list">
+
+        <!-- 01 -->
+        <div class="project-row fade-up">
+          <span class="project-num">01</span>
+          <div class="project-row-body">
+            <h3 class="project-row-title">Crypto Analysis Pipeline</h3>
+            <p class="project-row-desc">
+              A computational pipeline that processes historical cryptocurrency data to assess risk-return profiles, simulate investment scenarios, and surface actionable insights into long-term portfolio strategy. Built to handle multi-asset comparisons and stress-test assumptions across a range of market conditions. The full analysis includes volatility modeling, correlation analysis across assets, and scenario simulations.
+            </p>
+            <div class="project-stack">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">NumPy</span>
+              <span class="tag">Matplotlib</span>
+              <span class="tag">SciPy</span>
+              <span class="tag">Jupyter</span>
+            </div>
+          </div>
+          <div class="project-row-side">
+            <div class="project-metric">
+              <div class="project-metric-value">3yr+</div>
+              <div class="project-metric-label">Historical data analyzed</div>
+            </div>
+            <span class="status-badge">Completed</span>
+            <div class="project-link-group">
+              <a href="crypto analysis.html" class="proj-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Full Analysis
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="project-row fade-up fade-up-delay-1">
+          <span class="project-num">02</span>
+          <div class="project-row-body">
+            <h3 class="project-row-title">Chess ML Model</h3>
+            <p class="project-row-desc">
+              A machine learning model trained on large-scale chess datasets to evaluate board positions and generate optimized move sequences. Explores how neural networks can encode positional understanding and tactical patterns that emerge from millions of grandmaster games. The model aims to learn evaluation heuristics beyond traditional hand-crafted engine rules.
+            </p>
+            <div class="project-stack">
+              <span class="tag">Python</span>
+              <span class="tag">PyTorch</span>
+              <span class="tag">chess.py</span>
+              <span class="tag">NumPy</span>
+              <span class="tag">Jupyter</span>
+            </div>
+          </div>
+          <div class="project-row-side">
+            <span class="status-badge status-badge-wip">In progress</span>
+          </div>
+        </div>
+
+        <!-- 03 -->
+        <div class="project-row fade-up fade-up-delay-2">
+          <span class="project-num">03</span>
+          <div class="project-row-body">
+            <h3 class="project-row-title">Cyber Breach Analysis</h3>
+            <p class="project-row-desc">
+              An analysis of large-scale breach and incident report datasets to identify patterns in cybersecurity failures, correlate attack vectors with industry sectors, and determine which security measures correlate with reduced incident severity and frequency. Surfaces insights that can inform where organizations should prioritize their security investment.
+            </p>
+            <div class="project-stack">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">Seaborn</span>
+              <span class="tag">Scikit-learn</span>
+              <span class="tag">Jupyter</span>
+            </div>
+          </div>
+          <div class="project-row-side">
+            <span class="status-badge">Completed</span>
+          </div>
+        </div>
+
+        <!-- 04 -->
+        <div class="project-row fade-up fade-up-delay-3">
+          <span class="project-num">04</span>
+          <div class="project-row-body">
+            <h3 class="project-row-title">WeCLEAN — Web Platform</h3>
+            <p class="project-row-desc">
+              Designed and developed a full client website for WeCLEAN Inc., a professional cleaning services business. Delivered a clean, responsive, conversion-focused experience with custom layout, service pages, and strong visual branding. Project was delivered on schedule with clear communication throughout the engagement.
+            </p>
+            <div class="project-stack">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="project-row-side">
+            <span class="status-badge">Live</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT CTA -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <h2 class="contact-headline fade-up">Have a project<br>in mind?</h2>
+      <p class="contact-sub fade-up fade-up-delay-1">I'm open to interesting work, collaborations, and conversations.</p>
+      <div class="contact-actions fade-up fade-up-delay-2">
+        <a href="mailto:hello@jonahxx.com" class="btn btn-dark">Send an email</a>
+        <a href="index.html" class="btn btn-outline">Back to home</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2025 Jonah. All rights reserved.</span>
+        <ul class="footer-links">
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Writing</a></li>
+          <li><a href="resume.html">Resume</a></li>
+        </ul>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
