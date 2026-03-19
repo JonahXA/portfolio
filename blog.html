@@ -51,34 +51,107 @@
       color: #c7c7cc;
     }
 
-    /* Book cover: contain inside the 16/9 area with a neutral bg */
-    .blog-card-book-cover {
-      aspect-ratio: 16 / 9;
-      background: #f0ede8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+    /* ── Book Flip Card ── */
+    .book-flip-card {
+      perspective: 1100px;
+      height: 400px;
     }
 
-    .blog-card-book-cover img {
+    .book-flip-card-inner {
+      position: relative;
+      width: 100%;
       height: 100%;
-      width: auto;
-      max-width: 100%;
-      object-fit: contain;
+      transform-style: preserve-3d;
+      transition: transform 0.58s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .book-flip-card:hover .book-flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .book-flip-card-front,
+    .book-flip-card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    /* Front: full-bleed cover */
+    .book-flip-card-front {
+      overflow: hidden;
+      border: 1px solid var(--border-mid);
+    }
+
+    .book-flip-card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
-      transition: transform 0.4s var(--ease);
     }
 
-    .blog-card:hover .blog-card-book-cover img {
-      transform: scale(1.04);
+    .book-flip-card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 40px 22px 22px;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
     }
 
-    .blog-card-author {
+    .book-flip-card-title {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .book-flip-card-author {
       font-size: 12px;
-      color: var(--text-3);
-      margin-bottom: 8px;
-      margin-top: -4px;
+      color: rgba(255,255,255,0.62);
+      font-weight: 450;
+    }
+
+    /* Back: dark takeaway panel */
+    .book-flip-card-back {
+      background: var(--text);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      padding: 28px;
+      border-radius: var(--radius);
+    }
+
+    .book-flip-card-back-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 14px;
+    }
+
+    .book-flip-card-back-title {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+
+    .book-flip-card-back-author {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+
+    .book-flip-card-back-takeaway {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
     }
   </style>
 </head>
@@ -182,22 +255,28 @@
 
       <div class="blog-grid">
 
-        <div class="blog-card fade-up">
-          <div class="blog-card-book-cover">
-            <img
-              src="https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
-              alt="Atomic Habits by James Clear"
-              loading="lazy"
-            >
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-label">Finished · 2026</div>
-            <h2 class="blog-card-title">Atomic Habits</h2>
-            <p class="blog-card-author">James Clear</p>
-            <p class="blog-card-excerpt">Small habits compound into remarkable results. The system you belong to matters more than the goals you set — identity-based habits are what stick.</p>
-            <div class="blog-card-footer">
-              <span class="blog-card-read" style="color: var(--text-3); font-weight: 500; cursor: default;">Finished</span>
+        <div class="book-flip-card fade-up">
+          <div class="book-flip-card-inner">
+
+            <div class="book-flip-card-front">
+              <img
+                src="https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
+                alt="Atomic Habits by James Clear"
+                loading="lazy"
+              >
+              <div class="book-flip-card-overlay">
+                <div class="book-flip-card-title">Atomic Habits</div>
+                <div class="book-flip-card-author">James Clear</div>
+              </div>
             </div>
+
+            <div class="book-flip-card-back">
+              <div class="book-flip-card-back-label">Key Takeaways</div>
+              <div class="book-flip-card-back-title">Atomic Habits</div>
+              <div class="book-flip-card-back-author">James Clear</div>
+              <p class="book-flip-card-back-takeaway">Small habits compound into remarkable results. The system you belong to matters more than the goals you set — identity-based habits are what stick. You don't rise to the level of your goals, you fall to the level of your systems.</p>
+            </div>
+
           </div>
         </div>
 
