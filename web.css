@@ -145,12 +145,13 @@ ul, ol { list-style: none; }
 }
 
 .hero-name {
-  font-size: clamp(4.5rem, 12vw, 9rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 0.9;
   color: var(--text);
   margin-bottom: 48px;
+  text-align: center;
   opacity: 0;
   animation: fadeUp 0.9s var(--ease) 0.1s forwards;
 }
@@ -176,7 +177,8 @@ ul, ol { list-style: none; }
   color: var(--text-2);
   max-width: 680px;
   line-height: 1.65;
-  margin-bottom: 52px;
+  margin: 0 auto 52px;
+  text-align: center;
   opacity: 0;
   animation: fadeUp 0.9s var(--ease) 0.2s forwards;
 }
@@ -184,6 +186,7 @@ ul, ol { list-style: none; }
 .hero-actions {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 14px;
   opacity: 0;
@@ -253,7 +256,7 @@ ul, ol { list-style: none; }
 }
 
 .btn-hero {
-  background: transparent;
+  background: #f0ede8;
   color: var(--text);
   border: 1px solid var(--border-mid);
   border-radius: var(--radius);
@@ -263,7 +266,7 @@ ul, ol { list-style: none; }
 }
 
 .btn-hero:hover {
-  background: var(--bg-alt);
+  background: #e8e4de;
   border-color: var(--border-mid);
   transform: translateY(-1px);
 }
