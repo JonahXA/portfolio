@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Jonah</title>
+  <meta name="description" content="Software projects by Jonah — spanning data engineering, machine learning, and full-stack development.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="web.css">
+  <style>
+    /* ── Flip Card ── */
+    .flip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .flip-card {
+      perspective: 1100px;
+      height: 360px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.58s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-mid);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Front ── */
+    .flip-card-front {
+      background: var(--bg-alt2);
+      overflow: hidden;
+    }
+
+    .flip-card-front-art {
+      height: 180px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--bg-alt) 0%, #e8e8ed 100%);
+    }
+
+    .flip-card-front-art svg {
+      width: 52px;
+      height: 52px;
+      color: #aeaeb2;
+    }
+
+    .flip-card-front-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 24px 22px;
+      overflow: hidden;
+    }
+
+    .flip-card-front-title {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+.flip-card-front-tagline {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.55;
+      flex: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .flip-card-front-hint {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: auto;
+      padding-top: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-3);
+      margin-top: 14px;
+    }
+
+    .flip-card-front-hint svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    /* ── Back ── */
+    .flip-card-back {
+      background: var(--text);
+      transform: rotateY(180deg);
+      padding: 30px;
+      justify-content: space-between;
+    }
+
+    .flip-card-back-title {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .flip-card-back-desc {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+    }
+
+    .flip-card-back-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 18px;
+    }
+
+    .flip-card-back-stack .tag {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+    }
+
+    .flip-card-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #fff;
+      padding: 9px 16px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 100px;
+      transition: background var(--t), border-color var(--t);
+      align-self: flex-start;
+    }
+
+    .flip-card-back-link:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    .flip-card-back-link svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* ── Category Headers ── */
+    .project-category-header {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 56px;
+    }
+
+    .project-category-header:first-child {
+      padding-top: 0;
+    }
+
+    .project-category-header-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+
+    .project-category-header-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Jonah</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="blog.html">Thoughts &amp; Books</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="sprout.html">Sprout</a></li>
+        <li><a href="contact.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 13px;">Get in touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label" style="margin-bottom: 20px;">Portfolio</div>
+      <h1 class="page-title">Projects</h1>
+      <p class="page-sub">Hover any card to see the details.</p>
+    </div>
+  </div>
+
+  <!-- FLIP CARDS -->
+  <div class="container" style="padding-bottom: var(--sec);">
+    <div class="flip-grid" style="padding-top: var(--sec);">
+
+      <!-- ── Web Development ── -->
+      <div class="project-category-header">
+        <span class="project-category-header-label">Web Development</span>
+        <div class="project-category-header-line"></div>
+      </div>
+
+      <!-- WeCLEAN -->
+      <div class="flip-card fade-up">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-card-front-art">
+              <!-- Globe icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div class="flip-card-front-body">
+              <h2 class="flip-card-front-title">WeCLEAN</h2>
+              <p class="flip-card-front-tagline">Custom client website for a professional cleaning services business.</p>
+              <div class="flip-card-front-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                Hover to explore
+              </div>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <div>
+              <div class="flip-card-back-title">WeCLEAN</div>
+              <p class="flip-card-back-desc">Designed and built a responsive, conversion-focused website for WeCLEAN Inc. Delivered on schedule with strong communication throughout. Client noted clean design and a smooth collaboration process.</p>
+              <div class="flip-card-back-stack">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chromatic Varsity -->
+      <div class="flip-card fade-up fade-up-delay-1">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-card-front-art">
+              <!-- Shirt / apparel icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/>
+              </svg>
+            </div>
+            <div class="flip-card-front-body">
+              <h2 class="flip-card-front-title">Chromatic Varsity</h2>
+              <p class="flip-card-front-tagline">Web platform for a clothing brand — currently in development.</p>
+              <div class="flip-card-front-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                Hover to explore
+              </div>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <div>
+              <div class="flip-card-back-title">Chromatic Varsity</div>
+              <p class="flip-card-back-desc">Designing and building a full web platform for Chromatic Varsity, a clothing brand. Focused on clean product presentation, brand identity, and a seamless shopping experience. Engagement ongoing.</p>
+              <div class="flip-card-back-stack">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sprout -->
+      <div class="flip-card fade-up fade-up-delay-2">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-card-front-art">
+              <!-- Sprout / leaf icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 20s4-9 14-7"/>
+                <path d="M7 20c0 0-1-6 3-10"/>
+                <path d="M7 20H3"/>
+              </svg>
+            </div>
+            <div class="flip-card-front-body">
+              <h2 class="flip-card-front-title">Sprout</h2>
+              <p class="flip-card-front-tagline">Gamified K–12 education platform covering financial literacy, AI fundamentals, and entrepreneurship.</p>
+              <div class="flip-card-front-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                Hover to explore
+              </div>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <div>
+              <div class="flip-card-back-title">Sprout</div>
+              <p class="flip-card-back-desc">Full-stack interactive education platform with scenario-based simulations that teach students real-world decision-making. Includes AI-supported learning integrations and district pilot programs. Live at sproutnow.net.</p>
+              <div class="flip-card-back-stack">
+                <span class="tag">Full-Stack</span>
+                <span class="tag">AI</span>
+                <span class="tag">JavaScript</span>
+              </div>
+            </div>
+            <a href="sprout.html" class="flip-card-back-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              View page
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Data Analysis ── -->
+      <div class="project-category-header">
+        <span class="project-category-header-label">Data Analysis</span>
+        <div class="project-category-header-line"></div>
+      </div>
+
+      <!-- Crypto Analysis -->
+      <div class="flip-card fade-up">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-card-front-art">
+              <!-- TrendingUp icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                <polyline points="16 7 22 7 22 13"/>
+              </svg>
+            </div>
+            <div class="flip-card-front-body">
+              <h2 class="flip-card-front-title">Crypto Analysis Pipeline</h2>
+              <p class="flip-card-front-tagline">Risk-return modeling and investment simulation across crypto assets.</p>
+              <div class="flip-card-front-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                Hover to explore
+              </div>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <div>
+              <div class="flip-card-back-title">Crypto Analysis Pipeline</div>
+              <p class="flip-card-back-desc">Processes historical cryptocurrency data to assess risk-return profiles, simulate investment scenarios, and surface insights into long-term portfolio strategy. Handles multi-asset comparisons with volatility modeling and correlation analysis.</p>
+              <div class="flip-card-back-stack">
+                <span class="tag">Python</span>
+                <span class="tag">Pandas</span>
+                <span class="tag">NumPy</span>
+                <span class="tag">Matplotlib</span>
+                <span class="tag">SciPy</span>
+              </div>
+            </div>
+            <a href="crypto analysis.html" class="flip-card-back-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Full Analysis
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cyber Breach -->
+      <div class="flip-card fade-up fade-up-delay-1">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-card-front-art">
+              <!-- Shield icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div class="flip-card-front-body">
+              <h2 class="flip-card-front-title">Cyber Breach Analysis</h2>
+              <p class="flip-card-front-tagline">Pattern analysis of cybersecurity incidents to identify effective defenses.</p>
+              <div class="flip-card-front-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                Hover to explore
+              </div>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <div>
+              <div class="flip-card-back-title">Cyber Breach Analysis</div>
+              <p class="flip-card-back-desc">Analysis of breach and incident report datasets to identify patterns in cybersecurity failures, correlate attack vectors with industry sectors, and surface which security measures most effectively reduce incident severity.</p>
+              <div class="flip-card-back-stack">
+                <span class="tag">Python</span>
+                <span class="tag">Pandas</span>
+                <span class="tag">Seaborn</span>
+                <span class="tag">Scikit-learn</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Machine Learning ── -->
+      <div class="project-category-header">
+        <span class="project-category-header-label">Machine Learning</span>
+        <div class="project-category-header-line"></div>
+      </div>
+
+      <!-- Chess ML -->
+      <div class="flip-card fade-up">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-card-front-art">
+              <!-- Cpu icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                <rect x="9" y="9" width="6" height="6"/>
+                <line x1="9" y1="1" x2="9" y2="4"/>
+                <line x1="15" y1="1" x2="15" y2="4"/>
+                <line x1="9" y1="20" x2="9" y2="23"/>
+                <line x1="15" y1="20" x2="15" y2="23"/>
+                <line x1="20" y1="9" x2="23" y2="9"/>
+                <line x1="20" y1="14" x2="23" y2="14"/>
+                <line x1="1" y1="9" x2="4" y2="9"/>
+                <line x1="1" y1="14" x2="4" y2="14"/>
+              </svg>
+            </div>
+            <div class="flip-card-front-body">
+              <h2 class="flip-card-front-title">Chess ML Model</h2>
+              <p class="flip-card-front-tagline">Neural network trained to evaluate chess positions and generate optimized moves.</p>
+              <div class="flip-card-front-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                Hover to explore
+              </div>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <div>
+              <div class="flip-card-back-title">Chess ML Model</div>
+              <p class="flip-card-back-desc">Trained on large-scale grandmaster game datasets to learn positional evaluation and tactical patterns. Explores how neural networks can encode chess understanding beyond hand-crafted engine heuristics.</p>
+              <div class="flip-card-back-stack">
+                <span class="tag">Python</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">chess.py</span>
+                <span class="tag">NumPy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2025 Jonah. All rights reserved.</span>
+        <ul class="footer-links">
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Thoughts &amp; Books</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

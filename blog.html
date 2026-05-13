@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thoughts & Books — Jonah</title>
+  <meta name="description" content="Essays, thoughts, and books by Jonah.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="web.css">
+  <style>
+    .content-section {
+      padding: var(--sec) 0 0;
+    }
+
+    .content-section:first-of-type {
+      padding-top: clamp(32px, 4vw, 48px);
+    }
+
+    .content-section:last-of-type {
+      padding-bottom: var(--sec);
+    }
+
+    .content-section-header {
+      margin-bottom: 32px;
+      margin-left: 0;
+      padding-left: 0;
+      text-align: left;
+    }
+
+    .content-section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 6px;
+      margin-left: 0;
+      text-align: left;
+    }
+
+    .content-section-sub {
+      font-size: 0.9375rem;
+      color: var(--text-3);
+      line-height: 1.6;
+      margin-left: 0;
+      text-align: left;
+    }
+
+    /* Icon placeholder for thought cards */
+    .blog-card-icon {
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, var(--bg-alt) 0%, #e8e8ed 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .blog-card-icon svg {
+      width: 38px;
+      height: 38px;
+      color: #c7c7cc;
+    }
+
+    /* 4-column override for books grid */
+    .books-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 1000px) {
+      .books-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .books-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Book Flip Card ── */
+    .book-flip-card {
+      perspective: 1100px;
+      height: 360px;
+    }
+
+    .book-flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.58s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .book-flip-card:hover .book-flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .book-flip-card-front,
+    .book-flip-card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    /* Front: cover image top 65%, info panel bottom 35% */
+    .book-flip-card-front {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--border-mid);
+      background: var(--bg);
+    }
+
+    .book-flip-card-cover {
+      flex: 0 0 65%;
+      background: #f0ede8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .book-flip-card-cover img {
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .book-flip-card-info {
+      flex: 1;
+      padding: 14px 18px 16px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .book-flip-card-info-title {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+
+    .book-flip-card-info-author {
+      font-size: 11.5px;
+      color: var(--text-3);
+      font-weight: 450;
+    }
+
+    /* Back: dark takeaway panel */
+    .book-flip-card-back {
+      background: var(--text);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      padding: 28px;
+      border-radius: var(--radius);
+    }
+
+    .book-flip-card-back-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 14px;
+    }
+
+    .book-flip-card-back-title {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .book-flip-card-back-author {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+
+    .book-flip-card-back-takeaway {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Jonah</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="blog.html" class="active">Thoughts &amp; Books</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="sprout.html">Sprout</a></li>
+        <li><a href="contact.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 13px;">Get in touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label" style="margin-bottom: 20px;">Writing</div>
+      <h1 class="page-title">Thoughts &amp; Books</h1>
+      <p class="page-sub">Ideas worth expanding on, and the books behind them.</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- ── BOOKS ── -->
+    <div class="content-section">
+      <div class="content-section-header">
+        <h2 class="content-section-title">Books</h2>
+        <p class="content-section-sub">I set out to read more in 2026 — recording my finished books and biggest takeaways here.</p>
+      </div>
+
+      <div class="blog-grid books-grid">
+
+        <div class="book-flip-card fade-up">
+          <div class="book-flip-card-inner">
+
+            <div class="book-flip-card-front">
+              <div class="book-flip-card-cover">
+                <img
+                  src="https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
+                  alt="Atomic Habits by James Clear"
+                  loading="lazy"
+                >
+              </div>
+              <div class="book-flip-card-info">
+                <div class="book-flip-card-info-title">Atomic Habits</div>
+                <div class="book-flip-card-info-author">James Clear</div>
+              </div>
+            </div>
+
+            <div class="book-flip-card-back">
+              <div class="book-flip-card-back-label">Key Takeaways</div>
+              <div class="book-flip-card-back-title">Atomic Habits</div>
+              <div class="book-flip-card-back-author">James Clear</div>
+              <p class="book-flip-card-back-takeaway">Small habits compound into remarkable results. The system you belong to matters more than the goals you set — identity-based habits are what stick. You don't rise to the level of your goals, you fall to the level of your systems.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="book-flip-card fade-up fade-up-delay-1">
+          <div class="book-flip-card-inner">
+
+            <div class="book-flip-card-front">
+              <div class="book-flip-card-cover">
+                <img
+                  src="how-to-win-friends.jpg"
+                  alt="How to Win Friends and Influence People by Dale Carnegie"
+                  loading="lazy"
+                >
+              </div>
+              <div class="book-flip-card-info">
+                <div class="book-flip-card-info-title">How to Win Friends and Influence People</div>
+                <div class="book-flip-card-info-author">Dale Carnegie</div>
+              </div>
+            </div>
+
+            <div class="book-flip-card-back">
+              <div class="book-flip-card-back-label">Key Takeaways</div>
+              <div class="book-flip-card-back-title">How to Win Friends</div>
+              <div class="book-flip-card-back-author">Dale Carnegie</div>
+              <p class="book-flip-card-back-takeaway">People are moved by emotion, not logic. Genuine interest in others, remembering names, and making people feel important are not soft skills — they are leverage. The ability to see things from the other person's perspective is rarer and more powerful than almost any technical skill.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="book-flip-card fade-up fade-up-delay-2">
+          <div class="book-flip-card-inner">
+
+            <div class="book-flip-card-front">
+              <div class="book-flip-card-cover">
+                <img
+                  src="laws-of-human-nature.jpg"
+                  alt="The Laws of Human Nature by Robert Greene"
+                  loading="lazy"
+                >
+              </div>
+              <div class="book-flip-card-info">
+                <div class="book-flip-card-info-title">The Laws of Human Nature</div>
+                <div class="book-flip-card-info-author">Robert Greene</div>
+              </div>
+            </div>
+
+            <div class="book-flip-card-back">
+              <div class="book-flip-card-back-label">Key Takeaways</div>
+              <div class="book-flip-card-back-title">The Laws of Human Nature</div>
+              <div class="book-flip-card-back-author">Robert Greene</div>
+              <p class="book-flip-card-back-takeaway">People are largely driven by unconscious forces — envy, narcissism, grandiosity — that they rarely admit to themselves. The most powerful skill is learning to read these forces in others before they act on them, and to recognize them honestly in yourself first.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="book-flip-card fade-up fade-up-delay-3">
+          <div class="book-flip-card-inner">
+
+            <div class="book-flip-card-front">
+              <div class="book-flip-card-cover">
+                <img
+                  src="foundations-of-business-systems.jpg"
+                  alt="Foundations of Business Systems by Andersen Consulting"
+                  loading="lazy"
+                >
+              </div>
+              <div class="book-flip-card-info">
+                <div class="book-flip-card-info-title">Foundations of Business Systems</div>
+                <div class="book-flip-card-info-author">Andersen Consulting</div>
+              </div>
+            </div>
+
+            <div class="book-flip-card-back">
+              <div class="book-flip-card-back-label">Key Takeaways</div>
+              <div class="book-flip-card-back-title">Foundations of Business Systems</div>
+              <div class="book-flip-card-back-author">Andersen Consulting</div>
+              <p class="book-flip-card-back-takeaway">Organizations are systems, and every system has inputs, processes, and outputs that must be understood together. Information flows are as important as material flows — designing them poorly creates friction everywhere else in the business.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="book-flip-card fade-up">
+          <div class="book-flip-card-inner">
+
+            <div class="book-flip-card-front">
+              <div class="book-flip-card-cover">
+                <img
+                  src="siddhartha.jpg"
+                  alt="Siddhartha by Hermann Hesse"
+                  loading="lazy"
+                >
+              </div>
+              <div class="book-flip-card-info">
+                <div class="book-flip-card-info-title">Siddhartha</div>
+                <div class="book-flip-card-info-author">Hermann Hesse</div>
+              </div>
+            </div>
+
+            <div class="book-flip-card-back">
+              <div class="book-flip-card-back-label">Key Takeaways</div>
+              <div class="book-flip-card-back-title">Siddhartha</div>
+              <div class="book-flip-card-back-author">Hermann Hesse</div>
+              <p class="book-flip-card-back-takeaway">Wisdom cannot be taught — only experienced. Every path, including the wrong ones, is part of the journey. The river teaches that everything passes, everything is connected, and the present moment contains all time simultaneously.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="book-flip-card fade-up fade-up-delay-1">
+          <div class="book-flip-card-inner">
+
+            <div class="book-flip-card-front">
+              <div class="book-flip-card-cover">
+                <img
+                  src="four-pillars-critical-thinking.jpg"
+                  alt="The 4 Pillars of Critical Thinking by Patrik Ian Meyer"
+                  loading="lazy"
+                >
+              </div>
+              <div class="book-flip-card-info">
+                <div class="book-flip-card-info-title">The 4 Pillars of Critical Thinking</div>
+                <div class="book-flip-card-info-author">Patrik Ian Meyer</div>
+              </div>
+            </div>
+
+            <div class="book-flip-card-back">
+              <div class="book-flip-card-back-label">Key Takeaways</div>
+              <div class="book-flip-card-back-title">The 4 Pillars of Critical Thinking</div>
+              <div class="book-flip-card-back-author">Patrik Ian Meyer</div>
+              <p class="book-flip-card-back-takeaway">Clear thinking requires four disciplines working together: questioning assumptions, evaluating evidence, reasoning logically, and recognizing your own biases. Most bad decisions aren't from lack of information — they're from skipping one of these steps under pressure.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="book-flip-card fade-up fade-up-delay-2">
+          <div class="book-flip-card-inner">
+
+            <div class="book-flip-card-front">
+              <div class="book-flip-card-cover">
+                <img
+                  src="technical-analysis-masterclass.jpg"
+                  alt="Technical Analysis Masterclass by Rolf Schlotmann"
+                  loading="lazy"
+                >
+              </div>
+              <div class="book-flip-card-info">
+                <div class="book-flip-card-info-title">Technical Analysis Masterclass</div>
+                <div class="book-flip-card-info-author">Rolf Schlotmann</div>
+              </div>
+            </div>
+
+            <div class="book-flip-card-back">
+              <div class="book-flip-card-back-label">Key Takeaways</div>
+              <div class="book-flip-card-back-title">Technical Analysis Masterclass</div>
+              <div class="book-flip-card-back-author">Rolf Schlotmann</div>
+              <p class="book-flip-card-back-takeaway">Price action tells a story about supply and demand that fundamentals alone miss. Patterns repeat because human psychology repeats — understanding chart structure is ultimately an exercise in understanding crowd behavior under uncertainty.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="book-flip-card fade-up fade-up-delay-3">
+          <div class="book-flip-card-inner">
+
+            <div class="book-flip-card-front">
+              <div class="book-flip-card-cover">
+                <img
+                  src="seven-habits.jpg"
+                  alt="The 7 Habits of Highly Effective People by Stephen R. Covey"
+                  loading="lazy"
+                >
+              </div>
+              <div class="book-flip-card-info">
+                <div class="book-flip-card-info-title">The 7 Habits of Highly Effective People</div>
+                <div class="book-flip-card-info-author">Stephen R. Covey</div>
+              </div>
+            </div>
+
+            <div class="book-flip-card-back">
+              <div class="book-flip-card-back-label">Key Takeaways</div>
+              <div class="book-flip-card-back-title">The 7 Habits</div>
+              <div class="book-flip-card-back-author">Stephen R. Covey</div>
+              <p class="book-flip-card-back-takeaway">Effectiveness is built from the inside out — private victories before public ones. Begin with the end in mind, prioritize what matters over what's urgent, and seek first to understand before being understood. Interdependence is a higher state than independence.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── THOUGHTS ── -->
+    <div class="content-section">
+      <div class="content-section-header">
+        <h2 class="content-section-title">Thoughts</h2>
+        <p class="content-section-sub">Elaborated thoughts on things that peak my interest, and the books behind them.</p>
+      </div>
+
+      <div class="blog-grid">
+
+        <a href="Repitition &amp; Growth.html" class="blog-card fade-up">
+          <div class="blog-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/>
+              <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+          </div>
+          <div class="blog-card-body">
+            <h2 class="blog-card-title">Repetition &amp; Growth</h2>
+            <p class="blog-card-excerpt">On the underrated power of doing the same thing again and again — and what consistent effort quietly builds over time.</p>
+            <div class="blog-card-footer">
+              <span class="blog-card-read">
+                Read essay
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <a href="american-psycho.html" class="blog-card fade-up fade-up-delay-1">
+          <div class="blog-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18"/>
+              <line x1="7" y1="2" x2="7" y2="22"/>
+              <line x1="17" y1="2" x2="17" y2="22"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <line x1="2" y1="7" x2="7" y2="7"/>
+              <line x1="2" y1="17" x2="7" y2="17"/>
+              <line x1="17" y1="17" x2="22" y2="17"/>
+              <line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+          </div>
+          <div class="blog-card-body">
+            <h2 class="blog-card-title">American Psycho Synopsis</h2>
+            <p class="blog-card-excerpt">What the film gets right about identity, performance, and the hollow pursuit of status — and why it still resonates.</p>
+            <div class="blog-card-footer">
+              <span class="blog-card-read">
+                Read essay
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2025 Jonah. All rights reserved.</span>
+        <ul class="footer-links">
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Thoughts &amp; Books</a></li>
+          <li><a href="sprout.html">Sprout</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

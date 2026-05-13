@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume — Jonah</title>
+  <meta name="description" content="Resume of Jonah — software engineer and builder.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="web.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Jonah</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="blog.html">Writing</a></li>
+        <li><a href="resume.html" class="active">Resume</a></li>
+        <li><a href="contact.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 13px;">Get in touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label" style="margin-bottom: 20px;">Experience</div>
+      <h1 class="page-title">Resume</h1>
+      <p class="page-sub">Experiences, skills, and projects. Download the PDF for the full picture.</p>
+    </div>
+  </div>
+
+  <!-- RESUME CONTENT -->
+  <div class="resume-section">
+    <div class="container">
+      <div class="resume-embed fade-up">
+        <div id="pdf-viewer" style="
+          border: 1px solid var(--border-mid);
+          border-radius: 14px;
+          overflow: hidden;
+          background: #fafafa;
+          min-height: 500px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+          <p style="color: var(--text-3); font-size: 14px; text-align: center; padding: 60px 24px;">
+            Loading resume…
+          </p>
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+          <a href="resume.pdf" download class="btn btn-outline">Download PDF</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="margin-top: var(--sec);">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2025 Jonah. All rights reserved.</span>
+        <ul class="footer-links">
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Writing</a></li>
+          <li><a href="resume.html">Resume</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // PDF rendering
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+    const viewer = document.getElementById('pdf-viewer');
+    const loadingTask = pdfjsLib.getDocument('resume.pdf');
+
+    loadingTask.promise.then(function(pdf) {
+      viewer.innerHTML = '';
+      const totalPages = pdf.numPages;
+
+      for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+        pdf.getPage(pageNum).then(function(page) {
+          const scale = 1.8;
+          const viewport = page.getViewport({ scale });
+          const canvas = document.createElement('canvas');
+          canvas.style.display = 'block';
+          canvas.style.width = '100%';
+          canvas.style.height = 'auto';
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+          viewer.appendChild(canvas);
+          page.render({ canvasContext: canvas.getContext('2d'), viewport });
+        });
+      }
+    }).catch(function() {
+      viewer.innerHTML = '<p style="color: var(--text-3); font-size: 14px; text-align: center; padding: 80px 24px;">Resume PDF not found. <a href="resume.pdf" style="color: var(--text); text-decoration: underline;">Try downloading directly.</a></p>';
+    });
+  </script>
+</body>
+</html>
