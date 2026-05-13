@@ -75,31 +75,9 @@
       .books-grid { grid-template-columns: 1fr; }
     }
 
-    /* ── Book Flip Card ── */
+    /* ── Book Card ── */
     .book-flip-card {
-      perspective: 1100px;
       height: 360px;
-    }
-
-    .book-flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.58s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .book-flip-card:hover .book-flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .book-flip-card-front,
-    .book-flip-card-back {
-      position: absolute;
-      inset: 0;
-      border-radius: var(--radius);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
     }
 
     /* Front: cover image top 65%, info panel bottom 35% */
@@ -109,6 +87,8 @@
       overflow: hidden;
       border: 1px solid var(--border-mid);
       background: var(--bg);
+      height: 100%;
+      border-radius: var(--radius);
     }
 
     .book-flip-card-cover {
@@ -153,44 +133,7 @@
       font-weight: 450;
     }
 
-    /* Back: dark takeaway panel */
-    .book-flip-card-back {
-      background: var(--text);
-      transform: rotateY(180deg);
-      display: flex;
-      flex-direction: column;
-      padding: 28px;
-      border-radius: var(--radius);
-    }
 
-    .book-flip-card-back-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 14px;
-    }
-
-    .book-flip-card-back-title {
-      font-size: 1.0625rem;
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-
-    .book-flip-card-back-author {
-      font-size: 12px;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 20px;
-    }
-
-    .book-flip-card-back-takeaway {
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.7;
-    }
   </style>
 </head>
 <body>
@@ -225,14 +168,12 @@
     <div class="content-section">
       <div class="content-section-header">
         <h2 class="content-section-title">Books</h2>
-        <p class="content-section-sub">I set out to read more in 2026 — recording my finished books and biggest takeaways here.</p>
+        <p class="content-section-sub">My 2026 Reading Library</p>
       </div>
 
       <div class="blog-grid books-grid">
 
         <div class="book-flip-card fade-up">
-          <div class="book-flip-card-inner">
-
             <div class="book-flip-card-front">
               <div class="book-flip-card-cover">
                 <img
@@ -246,20 +187,9 @@
                 <div class="book-flip-card-info-author">James Clear</div>
               </div>
             </div>
-
-            <div class="book-flip-card-back">
-              <div class="book-flip-card-back-label">Key Takeaways</div>
-              <div class="book-flip-card-back-title">Atomic Habits</div>
-              <div class="book-flip-card-back-author">James Clear</div>
-              <p class="book-flip-card-back-takeaway">Small habits compound into remarkable results. The system you belong to matters more than the goals you set — identity-based habits are what stick. You don't rise to the level of your goals, you fall to the level of your systems.</p>
-            </div>
-
-          </div>
         </div>
 
         <div class="book-flip-card fade-up fade-up-delay-1">
-          <div class="book-flip-card-inner">
-
             <div class="book-flip-card-front">
               <div class="book-flip-card-cover">
                 <img
@@ -273,20 +203,9 @@
                 <div class="book-flip-card-info-author">Dale Carnegie</div>
               </div>
             </div>
-
-            <div class="book-flip-card-back">
-              <div class="book-flip-card-back-label">Key Takeaways</div>
-              <div class="book-flip-card-back-title">How to Win Friends</div>
-              <div class="book-flip-card-back-author">Dale Carnegie</div>
-              <p class="book-flip-card-back-takeaway">People are moved by emotion, not logic. Genuine interest in others, remembering names, and making people feel important are not soft skills — they are leverage. The ability to see things from the other person's perspective is rarer and more powerful than almost any technical skill.</p>
-            </div>
-
-          </div>
         </div>
 
         <div class="book-flip-card fade-up fade-up-delay-2">
-          <div class="book-flip-card-inner">
-
             <div class="book-flip-card-front">
               <div class="book-flip-card-cover">
                 <img
@@ -300,20 +219,9 @@
                 <div class="book-flip-card-info-author">Robert Greene</div>
               </div>
             </div>
-
-            <div class="book-flip-card-back">
-              <div class="book-flip-card-back-label">Key Takeaways</div>
-              <div class="book-flip-card-back-title">The Laws of Human Nature</div>
-              <div class="book-flip-card-back-author">Robert Greene</div>
-              <p class="book-flip-card-back-takeaway">People are largely driven by unconscious forces — envy, narcissism, grandiosity — that they rarely admit to themselves. The most powerful skill is learning to read these forces in others before they act on them, and to recognize them honestly in yourself first.</p>
-            </div>
-
-          </div>
         </div>
 
         <div class="book-flip-card fade-up fade-up-delay-3">
-          <div class="book-flip-card-inner">
-
             <div class="book-flip-card-front">
               <div class="book-flip-card-cover">
                 <img
@@ -327,20 +235,9 @@
                 <div class="book-flip-card-info-author">Andersen Consulting</div>
               </div>
             </div>
-
-            <div class="book-flip-card-back">
-              <div class="book-flip-card-back-label">Key Takeaways</div>
-              <div class="book-flip-card-back-title">Foundations of Business Systems</div>
-              <div class="book-flip-card-back-author">Andersen Consulting</div>
-              <p class="book-flip-card-back-takeaway">Organizations are systems, and every system has inputs, processes, and outputs that must be understood together. Information flows are as important as material flows — designing them poorly creates friction everywhere else in the business.</p>
-            </div>
-
-          </div>
         </div>
 
         <div class="book-flip-card fade-up">
-          <div class="book-flip-card-inner">
-
             <div class="book-flip-card-front">
               <div class="book-flip-card-cover">
                 <img
@@ -354,20 +251,9 @@
                 <div class="book-flip-card-info-author">Hermann Hesse</div>
               </div>
             </div>
-
-            <div class="book-flip-card-back">
-              <div class="book-flip-card-back-label">Key Takeaways</div>
-              <div class="book-flip-card-back-title">Siddhartha</div>
-              <div class="book-flip-card-back-author">Hermann Hesse</div>
-              <p class="book-flip-card-back-takeaway">Wisdom cannot be taught — only experienced. Every path, including the wrong ones, is part of the journey. The river teaches that everything passes, everything is connected, and the present moment contains all time simultaneously.</p>
-            </div>
-
-          </div>
         </div>
 
         <div class="book-flip-card fade-up fade-up-delay-1">
-          <div class="book-flip-card-inner">
-
             <div class="book-flip-card-front">
               <div class="book-flip-card-cover">
                 <img
@@ -381,20 +267,9 @@
                 <div class="book-flip-card-info-author">Patrik Ian Meyer</div>
               </div>
             </div>
-
-            <div class="book-flip-card-back">
-              <div class="book-flip-card-back-label">Key Takeaways</div>
-              <div class="book-flip-card-back-title">The 4 Pillars of Critical Thinking</div>
-              <div class="book-flip-card-back-author">Patrik Ian Meyer</div>
-              <p class="book-flip-card-back-takeaway">Clear thinking requires four disciplines working together: questioning assumptions, evaluating evidence, reasoning logically, and recognizing your own biases. Most bad decisions aren't from lack of information — they're from skipping one of these steps under pressure.</p>
-            </div>
-
-          </div>
         </div>
 
         <div class="book-flip-card fade-up fade-up-delay-2">
-          <div class="book-flip-card-inner">
-
             <div class="book-flip-card-front">
               <div class="book-flip-card-cover">
                 <img
@@ -408,20 +283,9 @@
                 <div class="book-flip-card-info-author">Rolf Schlotmann</div>
               </div>
             </div>
-
-            <div class="book-flip-card-back">
-              <div class="book-flip-card-back-label">Key Takeaways</div>
-              <div class="book-flip-card-back-title">Technical Analysis Masterclass</div>
-              <div class="book-flip-card-back-author">Rolf Schlotmann</div>
-              <p class="book-flip-card-back-takeaway">Price action tells a story about supply and demand that fundamentals alone miss. Patterns repeat because human psychology repeats — understanding chart structure is ultimately an exercise in understanding crowd behavior under uncertainty.</p>
-            </div>
-
-          </div>
         </div>
 
         <div class="book-flip-card fade-up fade-up-delay-3">
-          <div class="book-flip-card-inner">
-
             <div class="book-flip-card-front">
               <div class="book-flip-card-cover">
                 <img
@@ -435,15 +299,6 @@
                 <div class="book-flip-card-info-author">Stephen R. Covey</div>
               </div>
             </div>
-
-            <div class="book-flip-card-back">
-              <div class="book-flip-card-back-label">Key Takeaways</div>
-              <div class="book-flip-card-back-title">The 7 Habits</div>
-              <div class="book-flip-card-back-author">Stephen R. Covey</div>
-              <p class="book-flip-card-back-takeaway">Effectiveness is built from the inside out — private victories before public ones. Begin with the end in mind, prioritize what matters over what's urgent, and seek first to understand before being understood. Interdependence is a higher state than independence.</p>
-            </div>
-
-          </div>
         </div>
 
       </div>
